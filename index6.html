@@ -8,478 +8,537 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
+        /* Estilos CSS */
         :root {
-            --primary-color: #1e3a8a;
-            --accent-color: #3b82f6;
-            --light-color: #f0f9ff;
-            --dark-color: #1e293b;
-            --success-color: #10b981;
-            --danger-color: #ef4444;
-            --warning-color: #f59e0b;
+            --primary-color: #1a3a5f;
+            --secondary-color: #2c5282;
+            --accent-color: #4299e1;
+            --light-color: #f7fafc;
+            --dark-color: #2d3748;
+            --success-color: #38a169;
+            --error-color: #e53e3e;
+            --border-color: #e2e8f0;
         }
-
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
             line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-color);
+            color: var(--dark-color);
         }
-
+        
         .header {
             background-color: var(--primary-color);
             color: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
+        
         .header .container {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
         }
-
+        
         .logo {
             display: flex;
             align-items: center;
         }
-
+        
         .logo i {
             font-size: 2rem;
             margin-right: 1rem;
-            color: var(--accent-color);
+            color: white;
         }
-
+        
         .logo h1 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 600;
             margin: 0;
         }
-
+        
         .logo span {
+            display: block;
             font-size: 0.9rem;
+            font-weight: 400;
             opacity: 0.8;
         }
-
-        .progress-container {
-            margin: 2rem 0;
+        
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-
-        .progress-text {
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            width: 100%;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+            outline: none;
+        }
+        
+        .form-select:disabled {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s, transform 0.1s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-danger {
+            background-color: var(--error-color);
+        }
+        
+        .btn-danger:hover {
+            background-color: #c53030;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+        }
+        
+        .btn-success:hover {
+            background-color: #2f855a;
+        }
+        
+        .btn:disabled {
+            background-color: #a0aec0;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .dynamic-section {
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            background-color: #f9fafb;
+            position: relative;
+            transition: box-shadow 0.2s;
+        }
+        
+        .dynamic-section:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .required-field::after {
+            content: " *";
+            color: var(--error-color);
+        }
+        
+        .checkbox-group {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 0.75rem;
+            margin-top: 0.25rem;
+        }
+        
+        hr {
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer .container {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.5rem;
+            align-items: center;
         }
-
+        
+        .footer-links a {
+            color: white;
+            margin-left: 1.5rem;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .progress-container {
+            margin-bottom: 2rem;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
         .progress {
             height: 10px;
             background-color: #e9ecef;
             border-radius: 5px;
             overflow: hidden;
         }
-
+        
         .progress-bar {
-            background-color: var(--accent-color);
             height: 100%;
-            width: 0;
-            transition: width 0.3s ease;
-        }
-
-        .form-section {
-            background-color: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .form-section-title {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--light-color);
-        }
-
-        .form-section-title i {
-            font-size: 1.5rem;
-            margin-right: 1rem;
-            color: var(--accent-color);
-        }
-
-        .form-section-title h2 {
-            font-size: 1.3rem;
-            margin: 0;
-            color: var(--dark-color);
-        }
-
-        .form-row {
-            display: flex;
-            flex-wrap: wrap;
-            margin: 0 -0.5rem;
-        }
-
-        .form-col {
-            flex: 1;
-            min-width: 300px;
-            padding: 0 0.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .required-field::after {
-            content: " *";
-            color: var(--danger-color);
-        }
-
-        .form-control, .form-select {
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 0.75rem;
-            width: 100%;
-            transition: border-color 0.3s;
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: var(--accent-color);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .form-hint {
-            font-size: 0.8rem;
-            color: #6c757d;
-            margin-top: 0.25rem;
-        }
-
-        .valid-feedback {
-            color: var(--success-color);
-            font-size: 0.8rem;
-            display: none;
-        }
-
-        .invalid-feedback {
-            color: var(--danger-color);
-            font-size: 0.8rem;
-            display: none;
-        }
-
-        .is-valid {
-            border-color: var(--success-color) !important;
-        }
-
-        .is-invalid {
-            border-color: var(--danger-color) !important;
-        }
-
-        .dynamic-section {
-            background-color: #f8f9fa;
-            border-radius: 6px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-        .add-button {
             background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            width: 0%;
+            transition: width 0.3s;
         }
-
-        .add-button:hover {
-            background-color: #2563eb;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.75rem;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            margin-right: 0.5rem;
-        }
-
-        .btn-success {
-            background-color: var(--success-color);
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            color: white;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .btn-success:hover {
-            background-color: #059669;
-        }
-
-        .captcha-container {
-            margin: 2rem 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-
-        .footer .container {
+        
+        .progress-text {
             display: flex;
             justify-content: space-between;
-            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
-
-        .footer-links a {
-            color: white;
-            margin-left: 1.5rem;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .alert {
-            padding: 1rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-        }
-
-        .alert-danger {
-            background-color: #fee;
-            color: var(--danger-color);
-            border-left: 4px solid var(--danger-color);
-        }
-
-        .alert-success {
-            background-color: #e6fffa;
-            color: var(--success-color);
-            border-left: 4px solid var(--success-color);
-        }
-
-        /* Estilos para el modal de revisión */
+        
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.5);
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s, visibility 0.3s;
         }
-
+        
         .modal-overlay.active {
             opacity: 1;
             visibility: visible;
         }
-
+        
         .modal {
             background-color: white;
             border-radius: 8px;
+            padding: 2rem;
+            max-width: 800px;
             width: 90%;
-            max-width: 900px;
             max-height: 90vh;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transform: scale(0.9);
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
             transition: transform 0.3s;
         }
-
+        
         .modal-overlay.active .modal {
-            transform: scale(1);
+            transform: translateY(0);
         }
-
+        
         .modal-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1.5rem;
             display: flex;
             align-items: center;
+            margin-bottom: 1.5rem;
         }
-
+        
         .modal-header i {
-            font-size: 1.5rem;
+            font-size: 2rem;
+            color: var(--primary-color);
             margin-right: 1rem;
         }
-
-        .modal-header h3 {
-            margin: 0;
-            font-size: 1.3rem;
-        }
-
-        .modal-header p {
-            margin: 0.5rem 0 0 0;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .modal-body {
-            padding: 1.5rem;
-            overflow-y: auto;
-            max-height: calc(90vh - 200px);
-        }
-
-        .review-section {
-            margin-bottom: 2rem;
-        }
-
-        .review-section h4 {
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
             color: var(--primary-color);
-            border-bottom: 1px solid #eee;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
         }
-
-        .review-section h4 i {
-            margin-right: 0.5rem;
-            font-size: 1rem;
+        
+        .modal-body {
+            margin-bottom: 1.5rem;
         }
-
-        .review-item {
-            margin-bottom: 0.75rem;
-        }
-
-        .review-item strong {
-            color: var(--dark-color);
-            display: inline-block;
-            width: 180px;
-        }
-
-        .review-empty {
-            color: #6c757d;
-            font-style: italic;
-        }
-
-        .review-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .review-list li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .review-list li:last-child {
-            border-bottom: none;
-        }
-
-        .review-checkbox {
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-        }
-
-        .review-checkbox label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .review-checkbox input {
-            margin-right: 0.5rem;
-        }
-
+        
         .modal-footer {
-            padding: 1rem 1.5rem;
-            border-top: 1px solid #eee;
             display: flex;
             justify-content: flex-end;
             gap: 1rem;
         }
-
-        .btn-cancel {
-            background-color: #6c757d;
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
+        
+        .review-section {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: #f9fafb;
+        }
+        
+        .review-section-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .review-section-title i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .review-item {
+            margin-bottom: 0.5rem;
+            display: flex;
+        }
+        
+        .review-item-label {
+            font-weight: 500;
+            width: 150px;
+            flex-shrink: 0;
+        }
+        
+        .review-item-value {
+            flex-grow: 1;
+        }
+        
+        .review-list-item {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-left: 3px solid var(--accent-color);
+            background-color: white;
+        }
+        
+        .review-checkbox {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 6px;
+        }
+        
+        .review-checkbox label {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
-
-        .btn-cancel:hover {
-            background-color: #5a6268;
+        
+        .review-checkbox input[type="checkbox"] {
+            margin-right: 0.75rem;
+            transform: scale(1.2);
         }
-
-        .btn-submit {
-            background-color: var(--success-color);
-            color: white;
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -0.75rem;
+        }
+        
+        .form-col {
+            flex: 1;
+            min-width: 250px;
+            padding: 0 0.75rem;
+        }
+        
+        .form-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .form-section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-section-title i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 1rem;
+        }
+        
+        .form-section-title h2 {
+            margin: 0;
             border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            padding: 0;
         }
-
-        .btn-submit:hover:not(:disabled) {
-            background-color: #059669;
+        
+        .add-button {
+            margin-top: 1rem;
         }
-
-        .btn-submit:disabled {
-            background-color: #a0aec0;
-            cursor: not-allowed;
+        
+        .add-button i {
+            margin-right: 0.5rem;
         }
-
+        
+        .form-hint {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+        
+        .form-control.is-valid {
+            border-color: var(--success-color);
+        }
+        
+        .form-control.is-invalid {
+            border-color: var(--error-color);
+        }
+        
+        .valid-feedback {
+            color: var(--success-color);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .invalid-feedback {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .alert {
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+        }
+        
+        .alert-warning {
+            color: #856404;
+            background-color: #fff3cd;
+            border-color: #ffeaa7;
+        }
+        
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        
+        .cargo-filters {
+            background-color: #f0f4f8;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        
+        .cargo-filters .form-group {
+            margin-bottom: 0.75rem;
+        }
+        
+        .cargo-filters label {
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        
         @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .form-row {
+                flex-direction: column;
+            }
             .form-col {
                 min-width: 100%;
+                padding: 0;
             }
-            
             .footer .container {
                 flex-direction: column;
                 text-align: center;
             }
-            
             .footer-links {
                 margin-top: 1rem;
             }
-            
             .footer-links a {
-                margin: 0 0.5rem;
+                margin: 0 0.75rem;
             }
-            
             .modal {
                 width: 95%;
-                max-height: 95vh;
+                padding: 1.5rem;
             }
-            
-            .review-item strong {
-                display: block;
+            .review-item {
+                flex-direction: column;
+            }
+            .review-item-label {
+                width: 100%;
                 margin-bottom: 0.25rem;
             }
         }
@@ -845,12 +904,67 @@
 
             <div class="form-section fade-in">
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success" id="reviewButton">
-                        <i class="fas fa-paper-plane"></i> Revisar y Enviar CV
+                    <button type="button" class="btn btn-success" id="reviewButton">
+                        <i class="fas fa-paper-plane"></i> Enviar CV
                     </button>
                 </div>
             </div>
         </form>
+    </div>
+
+    <!-- Modal de revisión de información -->
+    <div class="modal-overlay" id="reviewModal">
+        <div class="modal">
+            <div class="modal-header">
+                <i class="fas fa-eye"></i>
+                <h3 class="modal-title">Revisión de Información</h3>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i> Por favor, revise cuidadosamente la información ingresada antes de enviar su postulación. Una vez enviada, no podrá realizar modificaciones.
+                </div>
+                
+                <div id="reviewContent">
+                    <!-- El contenido se generará dinámicamente con JavaScript -->
+                </div>
+                
+                <div class="review-checkbox">
+                    <label for="confirmReview">
+                        <input type="checkbox" id="confirmReview">
+                        Estoy seguro y he revisado la información
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <div class="g-recaptcha" data-sitekey="6Lf4RDAsAAAAAIMOFL_equnHw5wmE_28V9BUbmZr"></div>
+                    <div class="invalid-feedback" id="captchaError">Por favor, complete el captcha</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" id="cancelReview">Cancelar</button>
+                <button type="button" class="btn btn-success" id="submitForm" disabled>
+                    <i class="fas fa-paper-plane"></i> Enviar CV
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal">
+            <div class="modal-header">
+                <i class="fas fa-check-circle"></i>
+                <h3 class="modal-title">¡Formulario enviado con éxito!</h3>
+            </div>
+            <div class="modal-body">
+                <p>Gracias por completar el formulario de postulación. Hemos recibido su información correctamente.</p>
+                <p>Pronto recibirá un correo de confirmación en <strong id="emailConfirmacion"></strong> con los detalles de su postulación.</p>
+                <p>Si no recibe el correo en las próximas horas, revise su carpeta de spam o contacte a nuestro equipo de soporte.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" id="closeModal">Cerrar</button>
+            </div>
+        </div>
     </div>
 
     <footer class="footer">
@@ -866,42 +980,6 @@
         </div>
     </footer>
 
-    <!-- Modal de Revisión -->
-    <div class="modal-overlay" id="reviewModal">
-        <div class="modal">
-            <div class="modal-header">
-                <i class="fas fa-eye"></i>
-                <div>
-                    <h3>Revisión de Información</h3>
-                    <p>Por favor, revise cuidadosamente la información ingresada antes de enviar su postulación. Una vez enviada, no podrá realizar modificaciones.</p>
-                </div>
-            </div>
-            <div class="modal-body">
-                <div id="reviewContent">
-                    <!-- Contenido generado dinámicamente -->
-                </div>
-                <div class="review-checkbox">
-                    <label>
-                        <input type="checkbox" id="confirmCheckbox">
-                        Estoy seguro y he revisado la información
-                    </label>
-                </div>
-                <div class="form-group">
-                    <div class="g-recaptcha" id="reviewCaptcha" data-sitekey="6Lf4RDAsAAAAAIMOFL_equnHw5wmE_28V9BUbmZr"></div>
-                    <div class="invalid-feedback" id="reviewCaptchaError">Por favor, complete el captcha</div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-cancel" id="cancelButton">
-                    <i class="fas fa-times"></i> Cancelar
-                </button>
-                <button type="button" class="btn-submit" id="finalSubmitButton" disabled>
-                    <i class="fas fa-paper-plane"></i> Enviar CV
-                </button>
-            </div>
-        </div>
-    </div>
-
     <script>
         // URL base configurable para facilitar cambios en el futuro
         const BASE_URL = "https://186.67.61.251:8001";
@@ -912,8 +990,6 @@
         let regionesDisponibles = [];
         let provinciasDisponibles = [];
         let todasLasProvincias = [];
-        let partidosDisponibles = [];
-        let sexosDisponibles = [];
         
         // Variable para controlar el debounce de updateProgressBar
         let progressBarTimeout;
@@ -1356,22 +1432,11 @@
             setTimeout(() => errorDiv.remove(), 8000);
         }
 
-        function mostrarExito(mensaje) {
-            const successDiv = document.createElement('div');
-            successDiv.className = 'alert alert-success';
-            successDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${mensaje}`;
-            const container = document.querySelector('.container');
-            container.prepend(successDiv);
-            successDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            setTimeout(() => successDiv.remove(), 8000);
-        }
-
         function cargarDatosReferencia() {
             // Cargar partidos políticos
             fetch(`${BASE_URL}/partidos_public`, { method: "GET" })
                 .then(r => r.json())
                 .then(data => {
-                    partidosDisponibles = data;
                     const select = document.getElementById("partidoSelect");
                     data.forEach(p => {
                         const opt = document.createElement("option");
@@ -1389,7 +1454,6 @@
             fetch(`${BASE_URL}/sexo_public`, { method: "GET" })
                 .then(r => r.json())
                 .then(data => {
-                    sexosDisponibles = data;
                     const select = document.getElementById("sexo");
                     data.forEach(s => {
                         const opt = document.createElement("option");
@@ -1417,7 +1481,6 @@
             fetch(`${BASE_URL}/region_public`, { method: "GET" })
                 .then(r => r.json())
                 .then(data => {
-                    regionesDisponibles = data;
                     const select = document.getElementById("regionSelect");
                     data.forEach(r => {
                         const opt = document.createElement("option");
@@ -1456,6 +1519,25 @@
                 .catch(error => {
                     console.error("Error al cargar regiones:", error);
                     mostrarError("Error al cargar las regiones. Por favor, recargue la página.");
+                });
+        }
+
+        function cargarProvincias(codigoRegion) {
+            fetch(`${BASE_URL}/provincia_public?codigo_region=${codigoRegion}`, { method: "GET" })
+                .then(r => r.json())
+                .then(data => {
+                    const select = document.getElementById("provinciaSelect");
+                    select.innerHTML = '<option value="">Seleccione provincia</option>';
+                    data.forEach(p => {
+                        const opt = document.createElement("option");
+                        opt.value = p.codigo_provincia;
+                        opt.textContent = p.nombre_provincia;
+                        select.appendChild(opt);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error al cargar provincias:", error);
+                    mostrarError("Error al cargar las provincias. Por favor, seleccione nuevamente la región.");
                 });
         }
 
@@ -1501,346 +1583,123 @@
                 });
         }
 
-        // ====== FUNCIONES PARA EL MODAL DE REVISIÓN ======
         function generarContenidoRevision() {
-            let html = '';
+            const reviewContent = document.getElementById('reviewContent');
+            reviewContent.innerHTML = '';
             
             // Datos Personales
-            html += '<div class="review-section">';
-            html += '<h4><i class="fas fa-user"></i> Datos Personales</h4>';
-            
-            const rut = document.getElementById('rut').value;
-            const nombres = document.getElementById('nombres').value;
-            const apellidoPaterno = document.getElementById('apellido_paterno').value;
-            const apellidoMaterno = document.getElementById('apellido_materno').value;
-            const fechaNacimiento = document.getElementById('fecha_nacimiento').value;
-            const nacionalidad = document.getElementById('nacionalidad').value;
-            const estadoCivil = document.getElementById('estado_civil').value;
-            const sexoSelect = document.getElementById('sexo');
-            const sexoText = sexoSelect.options[sexoSelect.selectedIndex]?.text || '';
-            const domicilio = document.getElementById('domicilio').value;
-            const email = document.getElementById('contacto_email').value;
-            const telefono = document.getElementById('contacto_telefono').value;
+            const datosPersonales = document.createElement('div');
+            datosPersonales.className = 'review-section';
             const regionSelect = document.getElementById('regionSelect');
-            const regionText = regionSelect.options[regionSelect.selectedIndex]?.text || '';
             const provinciaSelect = document.getElementById('provinciaSelect');
-            const provinciaText = provinciaSelect.options[provinciaSelect.selectedIndex]?.text || '';
-            
-            html += '<div class="review-item"><strong>RUT:</strong> ' + (rut || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>Nombre completo:</strong> ' + (nombres + ' ' + apellidoPaterno + ' ' + apellidoMaterno).trim() || 'No especificado' + '</div>';
-            html += '<div class="review-item"><strong>Fecha de nacimiento:</strong> ' + (fechaNacimiento ? new Date(fechaNacimiento).toLocaleDateString('es-CL') : 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>Nacionalidad:</strong> ' + (nacionalidad || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>Estado civil:</strong> ' + (estadoCivil || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>Sexo:</strong> ' + (sexoText || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>Domicilio:</strong> ' + (domicilio || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>Correo electrónico:</strong> ' + (email || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>Teléfono:</strong> ' + (telefono || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>Región:</strong> ' + (regionText || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>Provincia:</strong> ' + (provinciaText || 'No especificado') + '</div>';
-            html += '</div>';
-            
-            // Redes Sociales / Web
-            html += '<div class="review-section">';
-            html += '<h4><i class="fas fa-share-alt"></i> Redes Sociales / Web</h4>';
-            
-            const facebook = document.getElementById('facebook').value;
-            const xTwitter = document.getElementById('x_twitter').value;
-            const linkedin = document.getElementById('linkedin').value;
-            const instagram = document.getElementById('instagram').value;
-            const tiktok = document.getElementById('tiktok').value;
-            const youtube = document.getElementById('youtube').value;
-            const website = document.getElementById('website').value;
-            
-            html += '<div class="review-item"><strong>Facebook:</strong> ' + (facebook || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>X / Twitter:</strong> ' + (xTwitter || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>LinkedIn:</strong> ' + (linkedin || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>Instagram:</strong> ' + (instagram || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>TikTok:</strong> ' + (tiktok || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>YouTube:</strong> ' + (youtube || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>Sitio Web:</strong> ' + (website || 'No especificado') + '</div>';
-            html += '</div>';
+            datosPersonales.innerHTML = `
+                <div class="review-section-title"><i class="fas fa-user"></i> Datos Personales</div>
+                <div class="review-item"><div class="review-item-label">RUT:</div><div class="review-item-value">${document.getElementById('rut').value || 'No especificado'}</div></div>
+                <div class="review-item"><div class="review-item-label">Nombre completo:</div><div class="review-item-value">${document.getElementById('nombres').value} ${document.getElementById('apellido_paterno').value} ${document.getElementById('apellido_materno').value}</div></div>
+                <div class="review-item"><div class="review-item-label">Correo Electrónico:</div><div class="review-item-value">${document.getElementById('contacto_email').value || 'No especificado'}</div></div>
+                <div class="review-item"><div class="review-item-label">Región:</div><div class="review-item-value">${regionSelect.options[regionSelect.selectedIndex].text || 'No especificado'}</div></div>
+                <div class="review-item"><div class="review-item-label">Provincia:</div><div class="review-item-value">${provinciaSelect.options[provinciaSelect.selectedIndex].text || 'No especificado'}</div></div>
+            `;
+            reviewContent.appendChild(datosPersonales);
             
             // Partido Político
-            html += '<div class="review-section">';
-            html += '<h4><i class="fas fa-flag"></i> Partido Político</h4>';
-            
+            const partidoPolitico = document.createElement('div');
+            partidoPolitico.className = 'review-section';
             const partidoSelect = document.getElementById('partidoSelect');
-            const partidoText = partidoSelect.options[partidoSelect.selectedIndex]?.text || '';
-            
-            html += '<div class="review-item"><strong>Partido:</strong> ' + (partidoText || 'No especificado') + '</div>';
-            html += '</div>';
+            partidoPolitico.innerHTML = `
+                <div class="review-section-title"><i class="fas fa-flag"></i> Partido Político</div>
+                <div class="review-item"><div class="review-item-label">Partido:</div><div class="review-item-value">${partidoSelect.options[partidoSelect.selectedIndex].text || 'No especificado'}</div></div>
+            `;
+            reviewContent.appendChild(partidoPolitico);
             
             // Cargos de Interés
-            html += '<div class="review-section">';
-            html += '<h4><i class="fas fa-briefcase"></i> Cargos de Interés</h4>';
+            const cargosInteres = document.createElement('div');
+            cargosInteres.className = 'review-section';
+            let cargosHTML = '<div class="review-section-title"><i class="fas fa-briefcase"></i> Cargos de Interés</div>';
             
-            const cargosContainer = document.getElementById('cargosContainer');
-            const cargosElements = cargosContainer.querySelectorAll('.dynamic-section');
-            
-            if (cargosElements.length === 0) {
-                html += '<div class="review-empty">No se han agregado cargos de interés</div>';
-            } else {
-                html += '<ul class="review-list">';
-                cargosElements.forEach(cargoElement => {
-                    const cargoSelect = cargoElement.querySelector('.cargo-select');
-                    const cargoText = cargoSelect.options[cargoSelect.selectedIndex]?.text || '';
-                    html += '<li>' + (cargoText || 'Cargo no especificado') + '</li>';
+            const cargosElements = document.querySelectorAll('#cargosContainer .cargo-select');
+            if (cargosElements.length > 0) {
+                cargosElements.forEach(cargoSelect => {
+                    if (cargoSelect.value) {
+                        cargosHTML += `<div class="review-list-item">${cargoSelect.options[cargoSelect.selectedIndex].text}</div>`;
+                    }
                 });
-                html += '</ul>';
+            } else {
+                cargosHTML += '<div class="review-item-value">No se han agregado cargos de interés</div>';
             }
-            html += '</div>';
+            
+            cargosInteres.innerHTML = cargosHTML;
+            reviewContent.appendChild(cargosInteres);
             
             // Formación Académica
-            html += '<div class="review-section">';
-            html += '<h4><i class="fas fa-graduation-cap"></i> Formación Académica</h4>';
+            const formacionAcademica = document.createElement('div');
+            formacionAcademica.className = 'review-section';
+            let formacionHTML = '<div class="review-section-title"><i class="fas fa-graduation-cap"></i> Formación Académica</div>';
             
-            const formacionContainer = document.getElementById('formacionContainer');
-            const formacionElements = formacionContainer.querySelectorAll('.dynamic-section');
-            
-            if (formacionElements.length === 0) {
-                html += '<div class="review-empty">No se ha agregado formación académica</div>';
-            } else {
-                html += '<ul class="review-list">';
-                formacionElements.forEach(formacionElement => {
-                    const titulo = formacionElement.querySelector('input[name="titulo_grado"]').value;
-                    const institucion = formacionElement.querySelector('input[name="institucion"]').value;
-                    const anio = formacionElement.querySelector('input[name="anio_egreso"]').value;
-                    const campo = formacionElement.querySelector('input[name="campo_estudio"]').value;
+            const formacionElements = document.querySelectorAll('#formacionContainer .dynamic-section');
+            if (formacionElements.length > 0) {
+                formacionElements.forEach(formacion => {
+                    const titulo = formacion.querySelector('input[name="titulo_grado"]').value;
+                    const institucion = formacion.querySelector('input[name="institucion"]').value;
+                    const anio = formacion.querySelector('input[name="anio_egreso"]').value;
                     
-                    html += '<li>';
-                    html += '<div><strong>Título/Grado:</strong> ' + (titulo || 'No especificado') + '</div>';
-                    html += '<div><strong>Institución:</strong> ' + (institucion || 'No especificado') + '</div>';
-                    html += '<div><strong>Año de egreso:</strong> ' + (anio || 'No especificado') + '</div>';
-                    html += '<div><strong>Campo de estudio:</strong> ' + (campo || 'No especificado') + '</div>';
-                    html += '</li>';
+                    if (titulo || institucion || anio) {
+                        formacionHTML += `<div class="review-list-item">${titulo || 'No especificado'} - ${institucion || 'No especificado'} (${anio || 'No especificado'})</div>`;
+                    }
                 });
-                html += '</ul>';
+            } else {
+                formacionHTML += '<div class="review-item-value">No se ha agregado formación académica</div>';
             }
-            html += '</div>';
+            
+            formacionAcademica.innerHTML = formacionHTML;
+            reviewContent.appendChild(formacionAcademica);
             
             // Experiencia Laboral
-            html += '<div class="review-section">';
-            html += '<h4><i class="fas fa-user-tie"></i> Experiencia Laboral</h4>';
+            const experienciaLaboral = document.createElement('div');
+            experienciaLaboral.className = 'review-section';
+            let experienciaHTML = '<div class="review-section-title"><i class="fas fa-user-tie"></i> Experiencia Laboral</div>';
             
-            const experienciaContainer = document.getElementById('experienciaContainer');
-            const experienciaElements = experienciaContainer.querySelectorAll('.dynamic-section');
-            
-            if (experienciaElements.length === 0) {
-                html += '<div class="review-empty">No se ha agregado experiencia laboral</div>';
-            } else {
-                html += '<ul class="review-list">';
-                experienciaElements.forEach(experienciaElement => {
-                    const cargo = experienciaElement.querySelector('input[name="cargo"]').value;
-                    const institucion = experienciaElement.querySelector('input[name="institucion"]').value;
-                    const fechaDesde = experienciaElement.querySelector('input[name="fecha_desde"]').value;
-                    const fechaHasta = experienciaElement.querySelector('input[name="fecha_hasta"]').value;
-                    const duracion = experienciaElement.querySelector('input[name="duracion_texto"]').value;
-                    const logros = experienciaElement.querySelector('textarea[name="logros"]').value;
+            const experienciaElements = document.querySelectorAll('#experienciaContainer .dynamic-section');
+            if (experienciaElements.length > 0) {
+                experienciaElements.forEach(experiencia => {
+                    const cargo = experiencia.querySelector('input[name="cargo"]').value;
+                    const institucion = experiencia.querySelector('input[name="institucion"]').value;
+                    const fechaDesde = experiencia.querySelector('input[name="fecha_desde"]').value;
+                    const fechaHasta = experiencia.querySelector('input[name="fecha_hasta"]').value;
                     
-                    html += '<li>';
-                    html += '<div><strong>Cargo:</strong> ' + (cargo || 'No especificado') + '</div>';
-                    html += '<div><strong>Institución:</strong> ' + (institucion || 'No especificado') + '</div>';
-                    
-                    if (fechaDesde || fechaHasta) {
-                        const desdeFormatted = fechaDesde ? new Date(fechaDesde).toLocaleDateString('es-CL') : '';
-                        const hastaFormatted = fechaHasta ? new Date(fechaHasta).toLocaleDateString('es-CL') : '';
-                        html += '<div><strong>Período:</strong> ' + (desdeFormatted || 'No especificado') + ' - ' + (hastaFormatted || 'Actualidad') + '</div>';
+                    if (cargo || institucion || fechaDesde || fechaHasta) {
+                        experienciaHTML += `<div class="review-list-item">${cargo || 'No especificado'} en ${institucion || 'No especificado'} (${fechaDesde || 'No especificado'} - ${fechaHasta || 'Actualidad'})</div>`;
                     }
-                    
-                    html += '<div><strong>Duración:</strong> ' + (duracion || 'No especificado') + '</div>';
-                    
-                    if (logros) {
-                        html += '<div><strong>Logros:</strong> ' + logros + '</div>';
-                    }
-                    
-                    html += '</li>';
                 });
-                html += '</ul>';
+            } else {
+                experienciaHTML += '<div class="review-item-value">No se ha agregado experiencia laboral</div>';
             }
-            html += '</div>';
+            
+            experienciaLaboral.innerHTML = experienciaHTML;
+            reviewContent.appendChild(experienciaLaboral);
             
             // Referencias
-            html += '<div class="review-section">';
-            html += '<h4><i class="fas fa-users"></i> Referencias</h4>';
+            const referencias = document.createElement('div');
+            referencias.className = 'review-section';
+            let referenciasHTML = '<div class="review-section-title"><i class="fas fa-users"></i> Referencias</div>';
             
-            const referenciasContainer = document.getElementById('referenciasContainer');
-            const referenciasElements = referenciasContainer.querySelectorAll('.dynamic-section');
-            
-            if (referenciasElements.length === 0) {
-                html += '<div class="review-empty">No se han agregado referencias</div>';
-            } else {
-                html += '<ul class="review-list">';
-                referenciasElements.forEach(referenciaElement => {
-                    const nombre = referenciaElement.querySelector('input[name="nombre_ref"]').value;
-                    const contacto = referenciaElement.querySelector('input[name="contacto_ref"]').value;
-                    const relacion = referenciaElement.querySelector('input[name="relacion_ref"]').value;
+            const referenciasElements = document.querySelectorAll('#referenciasContainer .dynamic-section');
+            if (referenciasElements.length > 0) {
+                referenciasElements.forEach(referencia => {
+                    const nombre = referencia.querySelector('input[name="nombre_ref"]').value;
+                    const contacto = referencia.querySelector('input[name="contacto_ref"]').value;
+                    const relacion = referencia.querySelector('input[name="relacion_ref"]').value;
                     
-                    html += '<li>';
-                    html += '<div><strong>Nombre:</strong> ' + (nombre || 'No especificado') + '</div>';
-                    html += '<div><strong>Contacto:</strong> ' + (contacto || 'No especificado') + '</div>';
-                    html += '<div><strong>Relación:</strong> ' + (relacion || 'No especificado') + '</div>';
-                    html += '</li>';
+                    if (nombre || contacto || relacion) {
+                        referenciasHTML += `<div class="review-list-item">${nombre || 'No especificado'} - ${relacion || 'No especificado'} (${contacto || 'No especificado'})</div>`;
+                    }
                 });
-                html += '</ul>';
-            }
-            html += '</div>';
-            
-            // Declaraciones de Incompatibilidad
-            html += '<div class="review-section">';
-            html += '<h4><i class="fas fa-exclamation-triangle"></i> Declaraciones de Incompatibilidad</h4>';
-            
-            const incompatibilidades = document.querySelectorAll('#incompatibilidades input:checked');
-            
-            if (incompatibilidades.length === 0) {
-                html += '<div class="review-empty">No se han marcado incompatibilidades</div>';
             } else {
-                html += '<ul class="review-list">';
-                incompatibilidades.forEach(checkbox => {
-                    html += '<li>' + checkbox.value + '</li>';
-                });
-                html += '</ul>';
-            }
-            html += '</div>';
-            
-            // Declaraciones Legales
-            html += '<div class="review-section">';
-            html += '<h4><i class="fas fa-file-contract"></i> Declaraciones Legales</h4>';
-            
-            const declaracionesLegales = document.querySelectorAll('#declaracionesLegales input');
-            
-            html += '<ul class="review-list">';
-            declaracionesLegales.forEach(checkbox => {
-                const checked = checkbox.checked ? '<i class="fas fa-check-circle text-success"></i>' : '<i class="fas fa-times-circle text-danger"></i>';
-                html += '<li>' + checked + ' ' + checkbox.value + '</li>';
-            });
-            html += '</ul>';
-            html += '</div>';
-            
-            // Cierre de Formulario
-            html += '<div class="review-section">';
-            html += '<h4><i class="fas fa-signature"></i> Cierre de Formulario</h4>';
-            
-            const nombreFirmante = document.getElementById('nombre_firmante').value;
-            const rutFirmante = document.getElementById('rut_firmante').value;
-            const lugar = document.getElementById('lugar').value;
-            const fechaFirma = document.getElementById('fecha_firma').value;
-            
-            html += '<div class="review-item"><strong>Nombre firmante:</strong> ' + (nombreFirmante || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>RUT firmante:</strong> ' + (rutFirmante || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>Lugar:</strong> ' + (lugar || 'No especificado') + '</div>';
-            html += '<div class="review-item"><strong>Fecha de firma:</strong> ' + (fechaFirma ? new Date(fechaFirma).toLocaleDateString('es-CL') : 'No especificado') + '</div>';
-            html += '</div>';
-            
-            return html;
-        }
-
-        function validarFormulario() {
-            const form = document.getElementById('cvForm');
-            let errores = [];
-            
-            // Limpiar errores anteriores
-            form.querySelectorAll('.is-invalid').forEach(el => {
-                el.classList.remove('is-invalid');
-            });
-            form.querySelectorAll('.invalid-feedback').forEach(el => {
-                el.style.display = 'none';
-            });
-            
-            // Validar campos requeridos
-            const inputs = form.querySelectorAll('input[required], select[required]');
-            inputs.forEach(input => {
-                if (input.type === 'checkbox' && !input.checked) {
-                    errores.push(`Debe marcar: ${input.labels[0]?.textContent || 'campo requerido'}`);
-                    input.classList.add('is-invalid');
-                } else if (input.type !== 'checkbox' && !input.value.trim()) {
-                    errores.push(`Complete el campo: ${input.labels[0]?.textContent || input.name}`);
-                    input.classList.add('is-invalid');
-                }
-            });
-            
-            // Validar declaraciones legales específicamente
-            const declaracionesLegales = document.querySelectorAll("#declaracionesLegales input[type='checkbox'][required]");
-            let todasMarcadas = true;
-            declaracionesLegales.forEach(checkbox => {
-                if (!checkbox.checked) {
-                    todasMarcadas = false;
-                    checkbox.classList.add('is-invalid');
-                }
-            });
-            
-            if (!todasMarcadas) {
-                document.getElementById('declaracionesError').style.display = 'block';
-                errores.push('Debe aceptar todas las declaraciones legales');
+                referenciasHTML += '<div class="review-item-value">No se han agregado referencias</div>';
             }
             
-            // Validar RUT del firmante
-            const rutPrincipal = document.getElementById('rut').value;
-            const rutFirmante = document.getElementById('rut_firmante').value;
-            if (rutFirmante && rutPrincipal && normalizarRut(rutFirmante) !== normalizarRut(rutPrincipal)) {
-                document.getElementById('rutFirmanteError').textContent = 'El RUT del firmante debe coincidir con el RUT principal';
-                document.getElementById('rutFirmanteError').style.display = 'block';
-                document.getElementById('rut_firmante').classList.add('is-invalid');
-                errores.push('El RUT del firmante debe coincidir con el RUT principal');
-            }
-            
-            // Validar RUT principal
-            const rutField = document.getElementById('rut');
-            if (rutField.value && !validarRut(rutField.value)) {
-                document.getElementById('rutError').style.display = 'block';
-                rutField.classList.add('is-invalid');
-                errores.push('El RUT no es válido');
-            }
-            
-            // Validar email
-            const emailField = document.getElementById('contacto_email');
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (emailField.value && !emailRegex.test(emailField.value)) {
-                document.getElementById('emailError').style.display = 'block';
-                emailField.classList.add('is-invalid');
-                errores.push('El correo electrónico no es válido');
-            }
-            
-            // Si hay errores, mostrarlos y retornar false
-            if (errores.length > 0) {
-                mostrarError('Por favor complete todos los campos requeridos:\n' + errores.join('\n'));
-                // Scroll al primer error
-                const primerError = form.querySelector('.is-invalid');
-                if (primerError) {
-                    primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-                return false;
-            }
-            
-            return true;
-        }
-
-        function abrirModalRevision() {
-            // Validar formulario antes de abrir el modal
-            if (!validarFormulario()) {
-                return;
-            }
-            
-            // Generar contenido de revisión
-            const reviewContent = document.getElementById('reviewContent');
-            reviewContent.innerHTML = generarContenidoRevision();
-            
-            // Mostrar modal
-            const modal = document.getElementById('reviewModal');
-            modal.classList.add('active');
-            
-            // Resetear estado del checkbox y captcha
-            document.getElementById('confirmCheckbox').checked = false;
-            document.getElementById('finalSubmitButton').disabled = true;
-            
-            // Resetear captcha si ya fue completado
-            if (typeof grecaptcha !== 'undefined') {
-                grecaptcha.reset();
-            }
-        }
-
-        function cerrarModalRevision() {
-            const modal = document.getElementById('reviewModal');
-            modal.classList.remove('active');
+            referencias.innerHTML = referenciasHTML;
+            reviewContent.appendChild(referencias);
         }
 
         // ====== INICIALIZACIÓN PRINCIPAL ======
@@ -1908,57 +1767,99 @@
             });
             updateProgressBar();
             
-            // --- Event Listener para el botón de revisión ---
-            document.getElementById('reviewButton').addEventListener('click', function(e) {
-                e.preventDefault();
-                abrirModalRevision();
-            });
-            
-            // --- Event Listeners para el modal ---
-            document.getElementById('cancelButton').addEventListener('click', cerrarModalRevision);
-            
-            // Cerrar modal al hacer clic fuera del contenido
-            document.getElementById('reviewModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    cerrarModalRevision();
-                }
-            });
-            
-            // Cerrar modal con la tecla ESC
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    const modal = document.getElementById('reviewModal');
-                    if (modal.classList.contains('active')) {
-                        cerrarModalRevision();
-                    }
-                }
-            });
-            
-            // Habilitar/deshabilitar botón de envío final según el checkbox y captcha
-            document.getElementById('confirmCheckbox').addEventListener('change', function() {
-                const checkboxChecked = this.checked;
-                const captchaCompleted = grecaptcha.getResponse() !== '';
+            // --- Event Listeners de Modales y Submit ---
+            document.getElementById('reviewButton').addEventListener('click', function() {
+                const form = document.getElementById('cvForm');
+                let errores = [];
                 
-                document.getElementById('finalSubmitButton').disabled = !(checkboxChecked && captchaCompleted);
+                // Limpiar errores anteriores
+                form.querySelectorAll('.is-invalid').forEach(el => {
+                    el.classList.remove('is-invalid');
+                });
+                form.querySelectorAll('.invalid-feedback').forEach(el => {
+                    el.style.display = 'none';
+                });
+                
+                // Validar campos requeridos
+                const inputs = form.querySelectorAll('input[required], select[required]');
+                inputs.forEach(input => {
+                    if (input.type === 'checkbox' && !input.checked) {
+                        errores.push(`Debe marcar: ${input.labels[0]?.textContent || 'campo requerido'}`);
+                        input.classList.add('is-invalid');
+                    } else if (input.type !== 'checkbox' && !input.value.trim()) {
+                        errores.push(`Complete el campo: ${input.labels[0]?.textContent || input.name}`);
+                        input.classList.add('is-invalid');
+                    }
+                });
+                
+                // Validar declaraciones legales específicamente
+                const declaracionesLegales = document.querySelectorAll("#declaracionesLegales input[type='checkbox'][required]");
+                let todasMarcadas = true;
+                declaracionesLegales.forEach(checkbox => {
+                    if (!checkbox.checked) {
+                        todasMarcadas = false;
+                        checkbox.classList.add('is-invalid');
+                    }
+                });
+                
+                if (!todasMarcadas) {
+                    document.getElementById('declaracionesError').style.display = 'block';
+                    errores.push('Debe aceptar todas las declaraciones legales');
+                }
+                
+                // Validar RUT del firmante
+                const rutPrincipal = document.getElementById('rut').value;
+                const rutFirmante = document.getElementById('rut_firmante').value;
+                if (rutFirmante && rutPrincipal && normalizarRut(rutFirmante) !== normalizarRut(rutPrincipal)) {
+                    document.getElementById('rutFirmanteError').textContent = 'El RUT del firmante debe coincidir con el RUT principal';
+                    document.getElementById('rutFirmanteError').style.display = 'block';
+                    document.getElementById('rut_firmante').classList.add('is-invalid');
+                    errores.push('El RUT del firmante debe coincidir con el RUT principal');
+                }
+                
+                // Si hay errores, mostrarlos y no abrir modal
+                if (errores.length > 0) {
+                    mostrarError('Por favor complete todos los campos requeridos:\n' + errores.join('\n'));
+                    // Scroll al primer error
+                    const primerError = form.querySelector('.is-invalid');
+                    if (primerError) {
+                        primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    return;
+                }
+                
+                // Si todo está bien, abrir modal
+                generarContenidoRevision();
+                document.getElementById('reviewModal').classList.add('active');
             });
             
-            // Event Listener para el botón de envío final
-            document.getElementById('finalSubmitButton').addEventListener('click', async function() {
-                // Validar captcha
+            document.getElementById('cancelReview').addEventListener('click', function() {
+                document.getElementById('reviewModal').classList.remove('active');
+            });
+            
+            document.getElementById('confirmReview').addEventListener('change', function() {
+                document.getElementById('submitForm').disabled = !this.checked;
+            });
+            
+            document.getElementById('submitForm').addEventListener('click', async function() {
                 if (!grecaptcha.getResponse()) {
-                    document.getElementById('reviewCaptchaError').style.display = 'block';
+                    document.getElementById('captchaError').style.display = 'block';
                     return;
                 } else {
-                    document.getElementById('reviewCaptchaError').style.display = 'none';
+                    document.getElementById('captchaError').style.display = 'none';
                 }
                 
-                // Deshabilitar botón de envío para evitar envíos múltiples
-                this.disabled = true;
-                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-                
-                // Preparar datos para enviar
-                const form = document.getElementById('cvForm');
-                const formData = new FormData(form);
+                const rutPrincipal = document.getElementById('rut').value;
+                const rutFirmante = document.getElementById('rut_firmante').value;
+                if (normalizarRut(rutFirmante) !== normalizarRut(rutPrincipal)) {
+                    document.getElementById('rutFirmanteError').textContent = 'El RUT del firmante debe coincidir con el RUT principal';
+                    document.getElementById('rutFirmanteError').style.display = 'block';
+                    document.getElementById('rut_firmante').classList.add('is-invalid');
+                    return;
+                }
+
+                const f = document.getElementById('cvForm');
+                const formData = new FormData(f);
                 const candidato = {};
                 const excludedFields = ['nombre_firmante', 'rut_firmante', 'fecha_firma', 'lugar', 'g-recaptcha-response'];
 
@@ -1998,10 +1899,10 @@
                     declaraciones_legales: [...document.querySelectorAll("#declaracionesLegales input")]
                         .map(c => ({ clausula: c.value, aceptado: c.checked })),
                     cierre_formulario: {
-                        nombre_firmante: form.nombre_firmante.value,
-                        rut_firmante: form.rut_firmante.value,
-                        fecha_firma: form.fecha_firma.value,
-                        lugar: form.lugar.value
+                        nombre_firmante: f.nombre_firmante.value,
+                        rut_firmante: f.rut_firmante.value,
+                        fecha_firma: f.fecha_firma.value,
+                        lugar: f.lugar.value
                     }
                 };
 
@@ -2012,6 +1913,7 @@
                         body: JSON.stringify(payload)
                     });
                     const responseData = await res.json();
+                    document.getElementById('reviewModal').classList.remove('active');
                     
                     if (responseData.message) {
                         if (responseData.message === "El RUT ya se encuentra registrado") {
@@ -2019,67 +1921,25 @@
                             const rutError = document.getElementById('rutError');
                             rutField.classList.add('is-invalid'); rutField.classList.remove('is-valid');
                             rutError.textContent = responseData.message; rutError.style.display = 'block';
-                            
-                            // Cerrar modal y hacer scroll al campo de error
-                            cerrarModalRevision();
                             rutField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            
-                            // Rehabilitar botón de envío
-                            this.disabled = false;
-                            this.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar CV';
                         } else {
                             mostrarError(responseData.message);
-                            
-                            // Cerrar modal
-                            cerrarModalRevision();
-                            
-                            // Rehabilitar botón de envío
-                            this.disabled = false;
-                            this.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar CV';
                         }
                     } else if (res.ok) {
                         const email = document.getElementById('contacto_email').value;
-                        mostrarExito(`¡Formulario enviado con éxito! Pronto recibirá un correo de confirmación en ${email}.`);
-                        
-                        // Cerrar modal
-                        cerrarModalRevision();
-                        
-                        // Limpiar formulario
-                        form.reset();
-                        document.getElementById('cargosContainer').innerHTML = '';
-                        document.getElementById('formacionContainer').innerHTML = '';
-                        document.getElementById('experienciaContainer').innerHTML = '';
-                        document.getElementById('referenciasContainer').innerHTML = '';
-                        
-                        // Restablecer fecha de firma
-                        establecerFechaActual();
-                        
-                        // Restablecer reCAPTCHA
-                        grecaptcha.reset();
-                        
-                        // Actualizar barra de progreso
-                        updateProgressBar();
+                        document.getElementById('emailConfirmacion').textContent = email;
+                        document.getElementById('confirmModal').classList.add('active');
                     } else {
                         mostrarError(`Error del servidor (${res.status}). Por favor, inténtelo más tarde.`);
-                        
-                        // Cerrar modal
-                        cerrarModalRevision();
-                        
-                        // Rehabilitar botón de envío
-                        this.disabled = false;
-                        this.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar CV';
                     }
                 } catch (error) {
                     console.error("Error al enviar el formulario:", error);
                     mostrarError("Error de conexión. Por favor, inténtelo nuevamente más tarde.");
-                    
-                    // Cerrar modal
-                    cerrarModalRevision();
-                    
-                    // Rehabilitar botón de envío
-                    this.disabled = false;
-                    this.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar CV';
                 }
+            });
+            
+            document.getElementById('closeModal').addEventListener('click', function() {
+                document.getElementById('confirmModal').classList.remove('active');
             });
         };
     </script>

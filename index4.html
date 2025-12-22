@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Postulación - RN Los Ríos 2025</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        /* Estilos CSS básicos - manteniendo el diseño original */
+        :root {
+            --primary-color: #1a3a5f;
+            --secondary-color: #2c5282;
+            --accent-color: #4299e1;
+            --light-color: #f7fafc;
+            --dark-color: #2d3748;
+            --success-color: #38a169;
+            --error-color: #e53e3e;
+            --border-color: #e2e8f0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+        
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: white;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .logo span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            width: 100%;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+            outline: none;
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s, transform 0.1s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-danger {
+            background-color: var(--error-color);
+        }
+        
+        .btn-danger:hover {
+            background-color: #c53030;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+        }
+        
+        .btn-success:hover {
+            background-color: #2f855a;
+        }
+        
+        .dynamic-section {
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            background-color: #f9fafb;
+            position: relative;
+            transition: box-shadow 0.2s;
+        }
+        
+        .dynamic-section:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .required-field::after {
+            content: " *";
+            color: var(--error-color);
+        }
+        
+        .checkbox-group {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 0.75rem;
+            margin-top: 0.25rem;
+        }
+        
+        hr {
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin-left: 1.5rem;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .progress-container {
+            margin-bottom: 2rem;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .progress {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--accent-color);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Modal de confirmación */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-header i {
+            font-size: 2rem;
+            color: var(--success-color);
+            margin-right: 1rem;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .modal-body {
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        /* Mejoras de formulario */
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -0.75rem;
+        }
+        
+        .form-col {
+            flex: 1;
+            min-width: 250px;
+            padding: 0 0.75rem;
+        }
+        
+        .form-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .form-section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-section-title i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 1rem;
+        }
+        
+        .form-section-title h2 {
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+        
+        .add-button {
+            margin-top: 1rem;
+        }
+        
+        .add-button i {
+            margin-right: 0.5rem;
+        }
+        
+        .form-hint {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+        
+        /* Validación visual */
+        .form-control.is-valid {
+            border-color: var(--success-color);
+        }
+        
+        .form-control.is-invalid {
+            border-color: var(--error-color);
+        }
+        
+        .valid-feedback {
+            color: var(--success-color);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .invalid-feedback {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        /* Alertas */
+        .alert {
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+        }
+        
+        .alert-warning {
+            color: #856404;
+            background-color: #fff3cd;
+            border-color: #ffeaa7;
+        }
+        
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .form-col {
+                min-width: 100%;
+                padding: 0;
+            }
+            
+            .footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                margin-top: 1rem;
+            }
+            
+            .footer-links a {
+                margin: 0 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-landmark"></i>
+                <div>
+                    <h1>Formulario de Postulación</h1>
+                    <span>RN Los Ríos 2025</span>
+                </div>
+            </div>
+            <div class="header-info">
+                <i class="fas fa-user-circle fa-2x"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="progress-container">
+            <div class="progress-text">
+                <span>Progreso del formulario</span>
+                <span id="progressPercentage">0%</span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+
+        <form id="cvForm">
+            <div class="form-section fade-in">
+                <div class="form-section-title">
+                    <i class="fas fa-user"></i>
+                    <h2>Datos Personales</h2>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="rut" class="required-field">RUT</label>
+                            <input type="text" class="form-control" id="rut" name="rut" placeholder="Ej: 12.345.678-9" required>
+                            <div class="invalid-feedback" id="rutError">El RUT no es válido</div>
+                            <div class="form-hint">Ingrese su RUT sin puntos y con guión</div>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="nombres" class="required-field">Nombres</label>
+                            <input type="text" class="form-control" id="nombres" name="nombres" required>
+                            <div class="valid-feedback">Campo válido</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="apellido_paterno" class="required-field">Apellido Paterno</label>
+                            <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" required>
+                            <div class="valid-feedback">Campo válido</div>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="apellido_materno">Apellido Materno</label>
+                            <input type="text" class="form-control" id="apellido_materno" name="apellido_materno">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                            <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="nacionalidad">Nacionalidad</label>
+                            <input type="text" class="form-control" id="nacionalidad" name="nacionalidad" value="Chilena">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="estado_civil">Estado Civil</label>
+                            <input type="text" class="form-control" id="estado_civil" name="estado_civil">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="sexo" class="required-field">Sexo</label>
+                            <select class="form-select" id="sexo" name="id_sexo" required>
+                                <option value="">Seleccione sexo</option>
+                            </select>
+                            <div class="invalid-feedback">Debe seleccionar una opción</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="domicilio">Domicilio</label>
+                    <input type="text" class="form-control" id="domicilio" name="domicilio">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="contacto_email" class="required-field">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="contacto_email" name="contacto_email" placeholder="ejemplo@correo.com" required>
+                            <div class="invalid-feedback" id="emailError">El correo electrónico no es válido</div>
+                            <div class="valid-feedback">Correo válido</div>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="contacto_telefono" class="required-field">Teléfono</label>
+                            <input type="tel" class="form-control" id="contacto_telefono" name="contacto_telefono" required>
+                            <div class="valid-feedback">Campo válido</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="regionSelect">Región</label>
+                            <select class="form-select" id="regionSelect" name="codigo_region">
+                                <option value="">Seleccione región</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="provinciaSelect">Provincia</label>
+                            <select class="form-select" id="provinciaSelect" name="codigo_provincia">
+                                <option value="">Seleccione provincia</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section fade-in">
+                <div class="form-section-title">
+                    <i class="fas fa-share-alt"></i>
+                    <h2>Redes Sociales / Web</h2>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="facebook">Facebook</label>
+                            <input type="text" class="form-control" id="facebook" name="facebook" placeholder="URL de su perfil">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="x_twitter">X / Twitter</label>
+                            <input type="text" class="form-control" id="x_twitter" name="x_twitter" placeholder="@usuario">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="linkedin">LinkedIn</label>
+                            <input type="text" class="form-control" id="linkedin" name="linkedin" placeholder="URL de su perfil">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="instagram">Instagram</label>
+                            <input type="text" class="form-control" id="instagram" name="instagram" placeholder="@usuario">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="tiktok">TikTok</label>
+                            <input type="text" class="form-control" id="tiktok" name="tiktok" placeholder="@usuario">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="youtube">YouTube</label>
+                            <input type="text" class="form-control" id="youtube" name="youtube" placeholder="URL de su canal">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="website">Sitio Web</label>
+                    <input type="text" class="form-control" id="website" name="website" placeholder="https://www.ejemplo.com">
+                </div>
+            </div>
+
+            <div class="form-section fade-in">
+                <div class="form-section-title">
+                    <i class="fas fa-flag"></i>
+                    <h2>Partido Político</h2>
+                </div>
+                
+                <div class="form-group">
+                    <label for="partidoSelect" class="required-field">Seleccione Partido</label>
+                    <select class="form-select" id="partidoSelect" name="id_partido" required>
+                        <option value="">Seleccione partido</option>
+                    </select>
+                    <div class="invalid-feedback">Debe seleccionar un partido</div>
+                </div>
+            </div>
+
+            <div class="form-section fade-in">
+                <div class="form-section-title">
+                    <i class="fas fa-briefcase"></i>
+                    <h2>Cargos de Interés</h2>
+                </div>
+                
+                <div id="cargosContainer"></div>
+                <button type="button" class="btn add-button" onclick="agregarCargo()">
+                    <i class="fas fa-plus-circle"></i> Agregar cargo
+                </button>
+            </div>
+
+            <div class="form-section fade-in">
+                <div class="form-section-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h2>Formación Académica (máximo 5)</h2>
+                </div>
+                
+                <div id="formacionContainer"></div>
+                <button type="button" class="btn add-button" onclick="agregarFormacion()">
+                    <i class="fas fa-plus-circle"></i> Agregar formación
+                </button>
+            </div>
+
+            <div class="form-section fade-in">
+                <div class="form-section-title">
+                    <i class="fas fa-user-tie"></i>
+                    <h2>Experiencia Laboral (máximo 6)</h2>
+                </div>
+                
+                <div id="experienciaContainer"></div>
+                <button type="button" class="btn add-button" onclick="agregarExperiencia()">
+                    <i class="fas fa-plus-circle"></i> Agregar experiencia
+                </button>
+            </div>
+
+            <div class="form-section fade-in">
+                <div class="form-section-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h2>Declaraciones de Incompatibilidad</h2>
+                </div>
+                
+                <div id="incompatibilidades">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="incomp1" name="incompatibilidades" value="Deudas tributarias o previsionales">
+                        <label for="incomp1">Deudas tributarias o previsionales</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="incomp2" name="incompatibilidades" value="Parientes en el servicio">
+                        <label for="incomp2">Parientes en el servicio</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="incomp3" name="incompatibilidades" value="Contratos con el Estado">
+                        <label for="incomp3">Contratos con el Estado</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="incomp4" name="incompatibilidades" value="Cargos políticos incompatibles">
+                        <label for="incomp4">Cargos políticos incompatibles</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="incomp5" name="incompatibilidades" value="Condenas por probidad">
+                        <label for="incomp5">Condenas por probidad</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section fade-in">
+                <div class="form-section-title">
+                    <i class="fas fa-file-contract"></i>
+                    <h2>Declaraciones Legales</h2>
+                </div>
+                
+                <div id="declaracionesLegales">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="legal1" name="declaraciones_legales" value="No existe obligación de informar resultados" required>
+                        <label for="legal1" class="required-field">No existe obligación de informar resultados</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="legal2" name="declaraciones_legales" value="Cumpliré disposiciones legales" required>
+                        <label for="legal2" class="required-field">Cumpliré disposiciones legales</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="legal3" name="declaraciones_legales" value="Uso interno RN Los Ríos" required>
+                        <label for="legal3" class="required-field">Uso interno RN Los Ríos</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="legal4" name="declaraciones_legales" value="Deslinde de responsabilidades" required>
+                        <label for="legal4" class="required-field">Deslinde de responsabilidades</label>
+                    </div>
+                    <div class="invalid-feedback" id="declaracionesError">Debe aceptar todas las declaraciones legales para continuar</div>
+                </div>
+            </div>
+
+            <div class="form-section fade-in">
+                <div class="form-section-title">
+                    <i class="fas fa-signature"></i>
+                    <h2>Cierre de Formulario</h2>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="nombre_firmante" class="required-field">Nombre Firmante</label>
+                            <input type="text" class="form-control" id="nombre_firmante" name="nombre_firmante" required>
+                            <div class="valid-feedback">Campo válido</div>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="rut_firmante" class="required-field">RUT Firmante</label>
+                            <input type="text" class="form-control" id="rut_firmante" name="rut_firmante" placeholder="Debe coincidir con el RUT principal" required>
+                            <div class="invalid-feedback" id="rutFirmanteError">El RUT del firmante debe coincidir con el RUT principal</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lugar" class="required-field">Lugar</label>
+                    <input type="text" class="form-control" id="lugar" name="lugar" required>
+                    <div class="valid-feedback">Campo válido</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Fecha de Firma</label>
+                    <input type="text" class="form-control" id="fecha_firma_display" readonly>
+                    <input type="hidden" id="fecha_firma" name="fecha_firma">
+                </div>
+            </div>
+
+            <div class="form-section fade-in">
+                <div class="form-group">
+                    <div class="g-recaptcha" data-sitekey="6Lf4RDAsAAAAAIMOFL_equnHw5wmE_28V9BUbmZr"></div>
+                    <div class="invalid-feedback" id="captchaError">Por favor, complete el captcha</div>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-paper-plane"></i> Enviar CV
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal">
+            <div class="modal-header">
+                <i class="fas fa-check-circle"></i>
+                <h3 class="modal-title">¡Formulario enviado con éxito!</h3>
+            </div>
+            <div class="modal-body">
+                <p>Gracias por completar el formulario de postulación. Hemos recibido su información correctamente.</p>
+                <p>Pronto recibirá un correo de confirmación en <strong id="emailConfirmacion"></strong> con los detalles de su postulación.</p>
+                <p>Si no recibe el correo en las próximas horas, revise su carpeta de spam o contacte a nuestro equipo de soporte.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" id="closeModal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div>
+                <p>&copy; 2025 RN Los Ríos - Todos los derechos reservados</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Política de Privacidad</a>
+                <a href="#">Términos y Condiciones</a>
+                <a href="#">Contacto</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // URL base configurable para facilitar cambios en el futuro
+        const BASE_URL = "https://186.67.61.251:8001";
+
+        // Función para validar RUT chileno
+        function validarRut(rut) {
+            // Eliminar puntos y guión
+            rut = rut.replace(/\./g, '').replace(/-/g, '');
+            
+            // Extraer dígito verificador
+            const dv = rut.slice(-1).toUpperCase();
+            const rutNumerico = rut.slice(0, -1);
+            
+            // Validar que el RUT tenga el formato correcto
+            if (rutNumerico.length < 7 || rutNumerico.length > 8) {
+                return false;
+            }
+            
+            // Calcular dígito verificador esperado
+            let suma = 0;
+            let multiplicador = 2;
+            
+            for (let i = rutNumerico.length - 1; i >= 0; i--) {
+                suma += parseInt(rutNumerico.charAt(i)) * multiplicador;
+                multiplicador = multiplicador === 7 ? 2 : multiplicador + 1;
+            }
+            
+            const dvEsperado = 11 - (suma % 11);
+            const dvCalculado = dvEsperado === 11 ? '0' : dvEsperado === 10 ? 'K' : dvEsperado.toString();
+            
+            return dv === dvCalculado;
+        }
+
+        // Función para formatear RUT
+        function formatearRut(rut) {
+            // Eliminar puntos y guión
+            rut = rut.replace(/\./g, '').replace(/-/g, '');
+            
+            // Extraer dígito verificador
+            const dv = rut.slice(-1);
+            const rutNumerico = rut.slice(0, -1);
+            
+            // Formatear con puntos y guión
+            let formateado = '';
+            let j = 0;
+            for (let i = rutNumerico.length - 1; i >= 0; i--) {
+                formateado = rutNumerico.charAt(i) + formateado;
+                j++;
+                if (j === 3 && i > 0) {
+                    formateado = '.' + formateado;
+                    j = 0;
+                }
+            }
+            
+            return formateado + '-' + dv;
+        }
+
+        // Función para actualizar la barra de progreso
+        function updateProgressBar() {
+            const form = document.getElementById('cvForm');
+            const inputs = form.querySelectorAll('input[required], select[required]');
+            let filled = 0;
+            
+            inputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    if (input.checked) filled++;
+                } else if (input.value.trim() !== '') {
+                    filled++;
+                }
+            });
+            
+            const percentage = Math.round((filled / inputs.length) * 100);
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('progressPercentage').textContent = percentage + '%';
+        }
+
+        // Establecer fecha actual como fecha de firma
+        function establecerFechaActual() {
+            const fechaActual = new Date();
+            const anio = fechaActual.getFullYear();
+            const mes = String(fechaActual.getMonth() + 1).padStart(2, '0');
+            const dia = String(fechaActual.getDate()).padStart(2, '0');
+            const fechaFormateada = `${anio}-${mes}-${dia}`;
+            
+            document.getElementById('fecha_firma').value = fechaFormateada;
+            document.getElementById('fecha_firma_display').value = `${dia}/${mes}/${anio}`;
+        }
+
+        // Cargar datos de referencia desde el backend
+        function cargarDatosReferencia() {
+            // Cargar partidos políticos
+            fetch(`${BASE_URL}/partidos_public`, { method: "GET" })
+                .then(r => r.json())
+                .then(data => {
+                    console.log("partidos", data);
+                    const select = document.getElementById("partidoSelect");
+                    data.forEach(p => {
+                        const opt = document.createElement("option");
+                        opt.value = p.id_partido;
+                        opt.textContent = p.nombre_partido;
+                        select.appendChild(opt);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error al cargar partidos:", error);
+                    mostrarError("Error al cargar los partidos. Por favor, recargue la página.");
+                });
+
+            // Cargar opciones de sexo
+            fetch(`${BASE_URL}/sexo_public`, { method: "GET" })
+                .then(r => r.json())
+                .then(data => {
+                    console.log("sexo", data);
+                    const select = document.getElementById("sexo");
+                    data.forEach(s => {
+                        const opt = document.createElement("option");
+                        opt.value = s.id_sexo;
+                        opt.textContent = s.detalle;
+                        select.appendChild(opt);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error al cargar opciones de sexo:", error);
+                    mostrarError("Error al cargar las opciones de sexo. Por favor, recargue la página.");
+                });
+
+            // Cargar regiones
+            fetch(`${BASE_URL}/region_public`, { method: "GET" })
+                .then(r => r.json())
+                .then(data => {
+                    console.log("regiones", data);
+                    const select = document.getElementById("regionSelect");
+                    data.forEach(r => {
+                        const opt = document.createElement("option");
+                        opt.value = r.codigo_region;
+                        opt.textContent = r.nombre_region;
+                        select.appendChild(opt);
+                    });
+                    
+                    // Agregar evento change para cargar provincias cuando se selecciona una región
+                    select.addEventListener('change', function() {
+                        const codigoRegion = this.value;
+                        if (codigoRegion) {
+                            cargarProvincias(codigoRegion);
+                        } else {
+                            // Limpiar select de provincias si no hay región seleccionada
+                            const provinciaSelect = document.getElementById("provinciaSelect");
+                            provinciaSelect.innerHTML = '<option value="">Seleccione provincia</option>';
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error("Error al cargar regiones:", error);
+                    mostrarError("Error al cargar las regiones. Por favor, recargue la página.");
+                });
+        }
+
+        // Cargar provincias según la región seleccionada
+        function cargarProvincias(codigoRegion) {
+            fetch(`${BASE_URL}/provincia_public?codigo_region=${codigoRegion}`, { method: "GET" })
+                .then(r => r.json())
+                .then(data => {
+                    console.log("provincias", data);
+                    const select = document.getElementById("provinciaSelect");
+                    select.innerHTML = '<option value="">Seleccione provincia</option>';
+                    data.forEach(p => {
+                        const opt = document.createElement("option");
+                        opt.value = p.codigo_provincia;
+                        opt.textContent = p.nombre_provincia;
+                        select.appendChild(opt);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error al cargar provincias:", error);
+                    mostrarError("Error al cargar las provincias. Por favor, seleccione nuevamente la región.");
+                });
+        }
+
+        // Función para mostrar errores de forma amigable
+        function mostrarError(mensaje) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'alert alert-warning';
+            errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${mensaje}`;
+            document.querySelector('.container').prepend(errorDiv);
+            
+            // Eliminar el mensaje después de 5 segundos
+            setTimeout(() => errorDiv.remove(), 5000);
+        }
+
+        // Inicializar la página
+        window.onload = function() {
+            establecerFechaActual();
+            cargarDatosReferencia();
+            
+            // Validar RUT principal
+            document.getElementById('rut').addEventListener('blur', function() {
+                const rut = this.value;
+                if (rut && !validarRut(rut)) {
+                    document.getElementById('rutError').style.display = 'block';
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                } else {
+                    document.getElementById('rutError').style.display = 'none';
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                    if (rut) {
+                        this.value = formatearRut(rut);
+                    }
+                }
+                updateProgressBar();
+            });
+            
+            // Validar RUT del firmante
+            document.getElementById('rut_firmante').addEventListener('blur', function() {
+                const rutPrincipal = document.getElementById('rut').value;
+                const rutFirmante = this.value;
+                
+                if (rutFirmante && !validarRut(rutFirmante)) {
+                    document.getElementById('rutFirmanteError').textContent = 'El RUT del firmante no es válido';
+                    document.getElementById('rutFirmanteError').style.display = 'block';
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                } else if (rutFirmante && rutPrincipal && formatearRut(rutFirmante) !== formatearRut(rutPrincipal)) {
+                    document.getElementById('rutFirmanteError').textContent = 'El RUT del firmante debe coincidir con el RUT principal';
+                    document.getElementById('rutFirmanteError').style.display = 'block';
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                } else {
+                    document.getElementById('rutFirmanteError').style.display = 'none';
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                    if (rutFirmante) {
+                        this.value = formatearRut(rutFirmante);
+                    }
+                }
+                updateProgressBar();
+            });
+            
+            // Validar correo electrónico
+            document.getElementById('contacto_email').addEventListener('blur', function() {
+                const email = this.value;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (email && !emailRegex.test(email)) {
+                    document.getElementById('emailError').style.display = 'block';
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                } else {
+                    document.getElementById('emailError').style.display = 'none';
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                }
+                updateProgressBar();
+            });
+            
+            // Actualizar barra de progreso cuando se modifica cualquier campo
+            document.querySelectorAll('input, select').forEach(element => {
+                element.addEventListener('change', updateProgressBar);
+            });
+            
+            // Actualizar barra de progreso inicial
+            updateProgressBar();
+        };
+
+        /* ====== UI DINÁMICA ====== */
+        // Variable para almacenar los cargos disponibles
+        let cargosDisponibles = [];
+
+        // Cargar cargos disponibles desde el backend
+        function cargarCargosDisponibles() {
+            fetch(`${BASE_URL}/cargos`, { method: "GET" })
+                .then(r => r.json())
+                .then(data => {
+                    console.log("cargos", data);
+                    cargosDisponibles = data;
+                })
+                .catch(error => {
+                    console.error("Error al cargar cargos:", error);
+                    mostrarError("Error al cargar los cargos disponibles. Por favor, recargue la página.");
+                });
+        }
+
+        function agregarCargo() {
+            const d = document.createElement("div");
+            d.className = "dynamic-section fade-in";
+            
+            // Crear opciones para el select de cargos
+            let opcionesCargos = '<option value="">Seleccione un cargo</option>';
+            cargosDisponibles.forEach(cargo => {
+                opcionesCargos += `<option value="${cargo.id_cargo}">${cargo.nombre_cargo}</option>`;
+            });
+            
+            d.innerHTML = `
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>Cargo</label>
+                            <select class="form-select" name="id_cargo">
+                                ${opcionesCargos}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-end mt-2">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="this.parentNode.parentNode.remove()">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                </div>`;
+            document.getElementById("cargosContainer").appendChild(d);
+            updateProgressBar();
+        }
+
+        function agregarFormacion() {
+            if (document.getElementById("formacionContainer").children.length >= 5) {
+                mostrarError("Ha alcanzado el límite máximo de 5 formaciones académicas.");
+                return;
+            }
+            
+            const d = document.createElement("div");
+            d.className = "dynamic-section fade-in";
+            d.innerHTML = `
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>Título/Grado</label>
+                            <input type="text" class="form-control" name="titulo_grado" placeholder="Título/Grado">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>Institución</label>
+                            <input type="text" class="form-control" name="institucion" placeholder="Institución">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>Año Egreso</label>
+                            <input type="number" class="form-control" name="anio_egreso" placeholder="Año egreso" min="1950" max="2030">
+                            <div class="invalid-feedback">El año de egreso debe ser un número válido</div>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>Campo de Estudio</label>
+                            <input type="text" class="form-control" name="campo_estudio" placeholder="Campo de estudio">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-end mt-2">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="this.parentNode.parentNode.remove()">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                </div>`;
+            
+            // Agregar validación para el año de egreso
+            const yearInput = d.querySelector('input[type="number"]');
+            yearInput.addEventListener('blur', function() {
+                const year = parseInt(this.value);
+                const currentYear = new Date().getFullYear();
+                
+                if (isNaN(year) || year < 1950 || year > currentYear + 10) {
+                    this.nextElementSibling.style.display = 'block';
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                } else {
+                    this.nextElementSibling.style.display = 'none';
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                }
+                updateProgressBar();
+            });
+            
+            document.getElementById("formacionContainer").appendChild(d);
+            updateProgressBar();
+        }
+
+        function agregarExperiencia() {
+            if (document.getElementById("experienciaContainer").children.length >= 6) {
+                mostrarError("Ha alcanzado el límite máximo de 6 experiencias laborales.");
+                return;
+            }
+            
+            const d = document.createElement("div");
+            d.className = "dynamic-section fade-in";
+            d.innerHTML = `
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>Cargo</label>
+                            <input type="text" class="form-control" name="cargo" placeholder="Cargo">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>Institución</label>
+                            <input type="text" class="form-control" name="institucion" placeholder="Institución">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>Fecha Desde</label>
+                            <input type="date" class="form-control" name="fecha_desde" placeholder="Fecha desde">
+                            <div class="invalid-feedback">Debe ingresar una fecha válida</div>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>Fecha Hasta</label>
+                            <input type="date" class="form-control" name="fecha_hasta" placeholder="Fecha hasta">
+                            <div class="invalid-feedback">La fecha hasta debe ser posterior a la fecha desde</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>Duración</label>
+                            <input type="text" class="form-control" name="duracion_texto" placeholder="Duración (texto)">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>Logros</label>
+                            <textarea class="form-control" name="logros" placeholder="Logros" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-end mt-2">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="this.parentNode.parentNode.remove()">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                </div>`;
+            
+            // Agregar validación para las fechas
+            const fechaDesde = d.querySelector('input[name="fecha_desde"]');
+            const fechaHasta = d.querySelector('input[name="fecha_hasta"]');
+            
+            fechaDesde.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.nextElementSibling.style.display = 'block';
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                } else {
+                    this.nextElementSibling.style.display = 'none';
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                    
+                    // Validar que fecha hasta sea posterior a fecha desde
+                    if (fechaHasta.value && new Date(fechaHasta.value) < new Date(this.value)) {
+                        fechaHasta.nextElementSibling.style.display = 'block';
+                        fechaHasta.classList.add('is-invalid');
+                        fechaHasta.classList.remove('is-valid');
+                    } else {
+                        fechaHasta.nextElementSibling.style.display = 'none';
+                        fechaHasta.classList.remove('is-invalid');
+                        if (fechaHasta.value) {
+                            fechaHasta.classList.add('is-valid');
+                        }
+                    }
+                }
+                updateProgressBar();
+            });
+            
+            fechaHasta.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.nextElementSibling.style.display = 'block';
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                } else if (fechaDesde.value && new Date(this.value) < new Date(fechaDesde.value)) {
+                    this.nextElementSibling.textContent = 'La fecha hasta debe ser posterior a la fecha desde';
+                    this.nextElementSibling.style.display = 'block';
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                } else {
+                    this.nextElementSibling.style.display = 'none';
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                }
+                updateProgressBar();
+            });
+            
+            document.getElementById("experienciaContainer").appendChild(d);
+            updateProgressBar();
+        }
+
+        /* ====== SUBMIT ====== */
+        document.getElementById("cvForm").addEventListener("submit", async e => {
+            e.preventDefault();
+
+            // Limpiar errores previos
+            document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+            document.querySelectorAll('.invalid-feedback').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.alert').forEach(el => el.remove());
+
+            // Validar que todos los campos de declaraciones legales estén marcados
+            const declaracionesLegales = document.querySelectorAll("#declaracionesLegales input[type='checkbox']");
+            let todasMarcadas = true;
+            
+            declaracionesLegales.forEach(checkbox => {
+                if (!checkbox.checked) {
+                    todasMarcadas = false;
+                }
+            });
+            
+            if (!todasMarcadas) {
+                document.getElementById('declaracionesError').style.display = 'block';
+                return;
+            } else {
+                document.getElementById('declaracionesError').style.display = 'none';
+            }
+
+            // Validar captcha
+            if (!grecaptcha.getResponse()) {
+                document.getElementById('captchaError').style.display = 'block';
+                return;
+            } else {
+                document.getElementById('captchaError').style.display = 'none';
+            }
+
+            // Validar RUT del firmante coincida con RUT principal
+            const rutPrincipal = document.getElementById('rut').value;
+            const rutFirmante = document.getElementById('rut_firmante').value;
+            
+            if (formatearRut(rutFirmante) !== formatearRut(rutPrincipal)) {
+                document.getElementById('rutFirmanteError').textContent = 'El RUT del firmante debe coincidir con el RUT principal';
+                document.getElementById('rutFirmanteError').style.display = 'block';
+                document.getElementById('rut_firmante').classList.add('is-invalid');
+                return;
+            }
+
+            const f = e.target;
+            const formData = new FormData(f);
+            const candidato = {};
+            
+            // Lista de campos que no pertenecen al objeto 'candidato'
+            const excludedFields = ['nombre_firmante', 'rut_firmante', 'fecha_firma', 'lugar', 'g-recaptcha-response'];
+
+            // Recopilar datos del candidato, excluyendo campos especiales y fechas vacías
+            for (let [key, value] of formData.entries()) {
+                if (!excludedFields.includes(key)) {
+                    // Si el campo es una fecha y está vacío, no lo incluimos en el payload.
+                    if (key === 'fecha_nacimiento' && !value) {
+                        continue; // Salta al siguiente campo
+                    }
+                    candidato[key] = value;
+                }
+            }
+
+            const cargosContainer = document.getElementById("cargosContainer");
+            const formacionContainer = document.getElementById("formacionContainer");
+            const experienciaContainer = document.getElementById("experienciaContainer");
+
+            // Construir el objeto de cierre de formulario, añadiendo solo los campos que tienen valor
+            const cierre_formulario = {};
+            if (f.nombre_firmante.value) cierre_formulario.nombre_firmante = f.nombre_firmante.value;
+            if (f.rut_firmante.value) cierre_formulario.rut_firmante = f.rut_firmante.value;
+            // La fecha de firma se establece automáticamente
+            if (f.fecha_firma.value) cierre_formulario.fecha_firma = f.fecha_firma.value;
+            if (f.lugar.value) cierre_formulario.lugar = f.lugar.value;
+
+            const payload = {
+                candidato: candidato,
+                cargos_interes: [...cargosContainer.children].map(d => ({
+                    id_cargo: d.querySelector('select[name="id_cargo"]').value
+                })),
+                formacion_academica: [...formacionContainer.children].map(d => ({
+                    titulo_grado: d.querySelector('input[name="titulo_grado"]').value,
+                    institucion: d.querySelector('input[name="institucion"]').value,
+                    anio_egreso: d.querySelector('input[name="anio_egreso"]').value,
+                    campo_estudio: d.querySelector('input[name="campo_estudio"]').value
+                })),
+                experiencia_laboral: [...experienciaContainer.children].map(d => ({
+                    cargo: d.querySelector('input[name="cargo"]').value,
+                    institucion: d.querySelector('input[name="institucion"]').value,
+                    fecha_desde: d.querySelector('input[name="fecha_desde"]').value,
+                    fecha_hasta: d.querySelector('input[name="fecha_hasta"]').value,
+                    duracion_texto: d.querySelector('input[name="duracion_texto"]').value,
+                    logros: d.querySelector('textarea[name="logros"]').value
+                })),
+                declaraciones_incompatibilidad: [...document.querySelectorAll("#incompatibilidades input:checked")]
+                    .map(c => ({ tipo_incompatibilidad: c.value, respuesta: true })),
+                declaraciones_legales: [...document.querySelectorAll("#declaracionesLegales input")]
+                    .map(c => ({ clausula: c.value, aceptado: c.checked })),
+                cierre_formulario: cierre_formulario
+            };
+
+            console.log("Payload a enviar:", payload);
+
+            try {
+                const res = await fetch(`${BASE_URL}/candidatos-completo`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const responseData = await res.json();
+                
+                // Manejar la respuesta específica del servidor
+                if (responseData.message) {
+                    if (responseData.message === "El RUT ya se encuentra registrado") {
+                        // Mostrar error en el campo RUT
+                        const rutField = document.getElementById('rut');
+                        const rutError = document.getElementById('rutError');
+                        rutField.classList.add('is-invalid');
+                        rutField.classList.remove('is-valid');
+                        rutError.textContent = responseData.message;
+                        rutError.style.display = 'block';
+                        // Hacer scroll al campo con error
+                        rutField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        // Mostrar otros mensajes del servidor como una alerta
+                        mostrarError(responseData.message);
+                    }
+                } else if (res.ok) {
+                    // Si no hay mensaje y la respuesta es OK, es un éxito
+                    const email = document.getElementById('contacto_email').value;
+                    document.getElementById('emailConfirmacion').textContent = email;
+                    document.getElementById('confirmModal').classList.add('active');
+                } else {
+                    // Manejar otros errores de servidor que no tienen un mensaje específico
+                    mostrarError(`Error del servidor (${res.status}). Por favor, inténtelo más tarde.`);
+                }
+            } catch (error) {
+                console.error("Error al enviar el formulario:", error);
+                mostrarError("Error de conexión. Por favor, inténtelo nuevamente más tarde.");
+            }
+        });
+
+        // Cerrar modal
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('confirmModal').classList.remove('active');
+            // Opcional: redirigir a otra página o limpiar el formulario
+            // document.getElementById('cvForm').reset();
+            // window.location.href = "/";
+        });
+
+        // Cargar cargos disponibles al iniciar la página
+        window.onload = function() {
+            establecerFechaActual();
+            cargarDatosReferencia();
+            cargarCargosDisponibles();
+            
+            // Validar RUT principal
+            document.getElementById('rut').addEventListener('blur', function() {
+                const rut = this.value;
+                if (rut && !validarRut(rut)) {
+                    document.getElementById('rutError').style.display = 'block';
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                } else {
+                    document.getElementById('rutError').style.display = 'none';
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                    if (rut) {
+                        this.value = formatearRut(rut);
+                    }
+                }
+                updateProgressBar();
+            });
+            
+            // Validar RUT del firmante
+            document.getElementById('rut_firmante').addEventListener('blur', function() {
+                const rutPrincipal = document.getElementById('rut').value;
+                const rutFirmante = this.value;
+                
+                if (rutFirmante && !validarRut(rutFirmante)) {
+                    document.getElementById('rutFirmanteError').textContent = 'El RUT del firmante no es válido';
+                    document.getElementById('rutFirmanteError').style.display = 'block';
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                } else if (rutFirmante && rutPrincipal && formatearRut(rutFirmante) !== formatearRut(rutPrincipal)) {
+                    document.getElementById('rutFirmanteError').textContent = 'El RUT del firmante debe coincidir con el RUT principal';
+                    document.getElementById('rutFirmanteError').style.display = 'block';
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                } else {
+                    document.getElementById('rutFirmanteError').style.display = 'none';
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                    if (rutFirmante) {
+                        this.value = formatearRut(rutFirmante);
+                    }
+                }
+                updateProgressBar();
+            });
+            
+            // Validar correo electrónico
+            document.getElementById('contacto_email').addEventListener('blur', function() {
+                const email = this.value;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (email && !emailRegex.test(email)) {
+                    document.getElementById('emailError').style.display = 'block';
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                } else {
+                    document.getElementById('emailError').style.display = 'none';
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                }
+                updateProgressBar();
+            });
+            
+            // Actualizar barra de progreso cuando se modifica cualquier campo
+            document.querySelectorAll('input, select').forEach(element => {
+                element.addEventListener('change', updateProgressBar);
+            });
+            
+            // Actualizar barra de progreso inicial
+            updateProgressBar();
+        };
+    </script>
+</body>
+</html>
