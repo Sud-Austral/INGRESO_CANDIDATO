@@ -7,7 +7,551 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <link rel="stylesheet" href="style/style.css">
+    <style>
+        /* Estilos CSS (manteniendo los estilos existentes) */
+        :root {
+            --primary-color: #1a3a5f;
+            --secondary-color: #2c5282;
+            --accent-color: #4299e1;
+            --light-color: #f7fafc;
+            --dark-color: #2d3748;
+            --success-color: #38a169;
+            --error-color: #e53e3e;
+            --border-color: #e2e8f0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+        
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: white;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .logo span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            width: 100%;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+            outline: none;
+        }
+        
+        .form-select:disabled {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s, transform 0.1s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-danger {
+            background-color: var(--error-color);
+        }
+        
+        .btn-danger:hover {
+            background-color: #c53030;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+        }
+        
+        .btn-success:hover {
+            background-color: #2f855a;
+        }
+        
+        .btn:disabled {
+            background-color: #a0aec0;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .dynamic-section {
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            background-color: #f9fafb;
+            position: relative;
+            transition: box-shadow 0.2s;
+        }
+        
+        .dynamic-section:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .required-field::after {
+            content: " *";
+            color: var(--error-color);
+        }
+        
+        .checkbox-group {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 0.75rem;
+            margin-top: 0.25rem;
+        }
+        
+        hr {
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin-left: 1.5rem;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .progress-container {
+            margin-bottom: 2rem;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .progress {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--accent-color);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -0.75rem;
+        }
+        
+        .form-col {
+            flex: 1;
+            min-width: 250px;
+            padding: 0 0.75rem;
+        }
+        
+        .form-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .form-section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-section-title i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 1rem;
+        }
+        
+        .form-section-title h2 {
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+        
+        .add-button {
+            margin-top: 1rem;
+        }
+        
+        .add-button i {
+            margin-right: 0.5rem;
+        }
+        
+        .form-hint {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+        
+        .form-control.is-valid {
+            border-color: var(--success-color);
+        }
+        
+        .form-control.is-invalid {
+            border-color: var(--error-color);
+        }
+        
+        .valid-feedback {
+            color: var(--success-color);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .invalid-feedback {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .alert {
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+        }
+        
+        .alert-warning {
+            color: #856404;
+            background-color: #fff3cd;
+            border-color: #ffeaa7;
+        }
+        
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        
+        .cargo-filters {
+            background-color: #f0f4f8;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        
+        .cargo-filters .form-group {
+            margin-bottom: 0.75rem;
+        }
+        
+        .cargo-filters label {
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .captcha-container {
+            margin: 2rem 0;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .submit-warning {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+        
+        .submit-warning i {
+            color: #ff9800;
+            margin-right: 0.5rem;
+        }
+        
+        .submit-warning p {
+            margin: 0;
+            font-weight: 500;
+            color: #5d4037;
+        }
+        
+        .submit-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+        
+        .submit-actions .btn {
+            min-width: 180px;
+        }
+        
+        /* Estilos para la pantalla de revisión */
+        .review-container {
+            display: none;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .review-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .review-section:last-child {
+            border-bottom: none;
+        }
+        
+        .review-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .review-title i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        
+        .review-title h3 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+        
+        .review-row {
+            display: flex;
+            margin-bottom: 0.75rem;
+        }
+        
+        .review-label {
+            font-weight: 600;
+            width: 200px;
+            color: var(--dark-color);
+        }
+        
+        .review-value {
+            flex: 1;
+            color: #4a5568;
+        }
+        
+        .review-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .review-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        
+        .review-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .review-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .review-actions .btn {
+            min-width: 180px;
+        }
+        
+        .review-empty {
+            color: #718096;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .form-row {
+                flex-direction: column;
+            }
+            .form-col {
+                min-width: 100%;
+                padding: 0;
+            }
+            .footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-links {
+                margin-top: 1rem;
+            }
+            .footer-links a {
+                margin: 0 0.75rem;
+            }
+            .submit-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .submit-actions .btn {
+                width: 100%;
+            }
+            .review-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .review-actions .btn {
+                width: 100%;
+            }
+            .review-row {
+                flex-direction: column;
+            }
+            .review-label {
+                width: 100%;
+                margin-bottom: 0.25rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -16,6 +560,7 @@
                 <i class="fas fa-landmark"></i>
                 <div>
                     <h1>Formulario de Postulación</h1>
+                    <span>RN Los Ríos 2025</span>
                 </div>
             </div>
             <div class="header-info">
@@ -82,8 +627,6 @@
                         <div class="form-group">
                             <label for="fecha_nacimiento">Fecha de Nacimiento</label>
                             <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento">
-                            <div class="invalid-feedback" id="fechaNacimientoError">Debe ser mayor de 18 años</div>
-                            <div class="form-hint">Edad: <span id="edadCalculada" class="edad-calculada">-</span></div>
                         </div>
                     </div>
                     <div class="form-col">
@@ -129,11 +672,7 @@
                     <div class="form-col">
                         <div class="form-group">
                             <label for="contacto_telefono" class="required-field">Teléfono</label>
-                            <div class="telefono-prefix">
-                                <span>+56</span>
-                                <input type="tel" class="form-control" id="contacto_telefono" name="contacto_telefono" placeholder="9 1234 5678" required>
-                            </div>
-                            <div class="invalid-feedback" id="telefonoError">Ingrese solo números</div>
+                            <input type="tel" class="form-control" id="contacto_telefono" name="contacto_telefono" required>
                             <div class="valid-feedback">Campo válido</div>
                         </div>
                     </div>
@@ -142,20 +681,18 @@
                 <div class="form-row">
                     <div class="form-col">
                         <div class="form-group">
-                            <label for="regionSelect" class="required-field">Región</label>
-                            <select class="form-select" id="regionSelect" name="codigo_region" required>
+                            <label for="regionSelect">Región</label>
+                            <select class="form-select" id="regionSelect" name="codigo_region">
                                 <option value="">Seleccione región</option>
                             </select>
-                            <div class="invalid-feedback">Debe seleccionar una región</div>
                         </div>
                     </div>
                     <div class="form-col">
                         <div class="form-group">
-                            <label for="provinciaSelect" class="required-field">Provincia</label>
-                            <select class="form-select" id="provinciaSelect" name="codigo_provincia" disabled required>
+                            <label for="provinciaSelect">Provincia</label>
+                            <select class="form-select" id="provinciaSelect" name="codigo_provincia" disabled>
                                 <option value="">Seleccione provincia</option>
                             </select>
-                            <div class="invalid-feedback">Debe seleccionar una provincia</div>
                             <div class="form-hint">Primero seleccione una región</div>
                         </div>
                     </div>
@@ -321,19 +858,19 @@
                 <div id="declaracionesLegales">
                     <div class="checkbox-group">
                         <input type="checkbox" id="legal1" name="declaraciones_legales" value="No existe obligación de informar resultados" required>
-                        <label for="legal1" class="required-field">No existe obligación de informar resultados, ni de citar a  entrevistas, ni menos aún de otorgar un cargo público.</label>
+                        <label for="legal1" class="required-field">No existe obligación de informar resultados</label>
                     </div>
                     <div class="checkbox-group">
                         <input type="checkbox" id="legal2" name="declaraciones_legales" value="Cumpliré disposiciones legales" required>
-                        <label for="legal2" class="required-field">En caso de ser convocado a ocupar algún cargo de gobierno, cumpliré todas las disposiciones legales aplicables a las postulaciones públicas (Ley 18.834, Ley 10.336, etc.).</label>
+                        <label for="legal2" class="required-field">Cumpliré disposiciones legales</label>
                     </div>
                     <div class="checkbox-group">
-                        <input type="checkbox" id="legal3" name="declaraciones_legales" value="Uso interno" required>
-                        <label for="legal3" class="required-field">Este CV es solo para un catastro interno de posibles colaboradores en la Región de Los Ríos. No implica, en ningún caso, corresponsabilidad de quien lo recibe y gestiona.</label>
+                        <input type="checkbox" id="legal3" name="declaraciones_legales" value="Uso interno RN Los Ríos" required>
+                        <label for="legal3" class="required-field">Uso interno RN Los Ríos</label>
                     </div>
                     <div class="checkbox-group">
                         <input type="checkbox" id="legal4" name="declaraciones_legales" value="Deslinde de responsabilidades" required>
-                        <label for="legal4" class="required-field">Deslindo de toda la responsabilidad a quienes reciben o canalizan esta información y permito el uso de la información acá expresada.</label>
+                        <label for="legal4" class="required-field">Deslinde de responsabilidades</label>
                     </div>
                     <div class="invalid-feedback" id="declaracionesError">Debe aceptar todas las declaraciones legales para continuar</div>
                 </div>
@@ -360,6 +897,12 @@
                             <div class="invalid-feedback" id="rutFirmanteError">El RUT del firmante debe coincidir con el RUT principal</div>
                         </div>
                     </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lugar" class="required-field">Lugar</label>
+                    <input type="text" class="form-control" id="lugar" name="lugar" required>
+                    <div class="valid-feedback">Campo válido</div>
                 </div>
                 
                 <div class="form-group">
@@ -423,10 +966,6 @@
             <div class="review-row">
                 <div class="review-label">Fecha de nacimiento:</div>
                 <div class="review-value" id="reviewFechaNacimiento"></div>
-            </div>
-            <div class="review-row">
-                <div class="review-label">Edad:</div>
-                <div class="review-value" id="reviewEdad"></div>
             </div>
             <div class="review-row">
                 <div class="review-label">Nacionalidad:</div>
@@ -582,8 +1121,8 @@
                 <div class="review-value" id="reviewRutFirmante"></div>
             </div>
             <div class="review-row">
-                <div class="review-label">IP de origen:</div>
-                <div class="review-value" id="reviewIP"></div>
+                <div class="review-label">Lugar:</div>
+                <div class="review-value" id="reviewLugar"></div>
             </div>
             <div class="review-row">
                 <div class="review-label">Fecha de Firma:</div>
@@ -624,7 +1163,6 @@
         let regionesDisponibles = [];
         let provinciasDisponibles = [];
         let todasLasProvincias = [];
-        let clientIP = '';
         
         // Variable para controlar el debounce de updateProgressBar
         let progressBarTimeout;
@@ -879,50 +1417,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Logros</label>
-                    <textarea class="form-control" name="logros" placeholder="Logros" rows="3"></textarea>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>Duración</label>
+                            <input type="text" class="form-control" name="duracion_texto" placeholder="Duración (texto)">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>Logros</label>
+                            <textarea class="form-control" name="logros" placeholder="Logros" rows="3"></textarea>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-hint duracion-calculada">Duración: <span class="duracion-text">-</span></div>
                 <div class="text-end mt-2">
                     <button type="button" class="btn btn-danger btn-sm" onclick="this.parentNode.parentNode.remove()">
                         <i class="fas fa-trash"></i> Eliminar
                     </button>
                 </div>`;
             
-            // Agregar validación para las fechas y cálculo de duración
+            // Agregar validación para las fechas
             const fechaDesde = d.querySelector('input[name="fecha_desde"]');
             const fechaHasta = d.querySelector('input[name="fecha_hasta"]');
-            const duracionText = d.querySelector('.duracion-text');
             
-            function calcularDuracion() {
-                if (fechaDesde.value && fechaHasta.value) {
-                    const desde = new Date(fechaDesde.value);
-                    const hasta = new Date(fechaHasta.value);
-                    
-                    if (hasta >= desde) {
-                        const diffTime = Math.abs(hasta - desde);
-                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                        
-                        const years = Math.floor(diffDays / 365);
-                        const months = Math.floor((diffDays % 365) / 30);
-                        const days = diffDays % 30;
-                        
-                        let duracionStr = '';
-                        if (years > 0) duracionStr += `${years} año${years > 1 ? 's' : ''} `;
-                        if (months > 0) duracionStr += `${months} mes${months > 1 ? 'es' : ''} `;
-                        if (days > 0) duracionStr += `${days} día${days > 1 ? 's' : ''}`;
-                        
-                        duracionText.textContent = duracionStr || 'Menos de un día';
-                    } else {
-                        duracionText.textContent = 'Fecha inválida';
-                    }
-                } else {
-                    duracionText.textContent = '-';
-                }
-            }
-            
-            fechaDesde.addEventListener('change', function() {
+            fechaDesde.addEventListener('blur', function() {
                 if (!this.value) {
                     this.nextElementSibling.style.display = 'block';
                     this.classList.add('is-invalid');
@@ -945,11 +1464,10 @@
                         }
                     }
                 }
-                calcularDuracion();
                 updateProgressBar();
             });
             
-            fechaHasta.addEventListener('change', function() {
+            fechaHasta.addEventListener('blur', function() {
                 if (!this.value) {
                     this.nextElementSibling.style.display = 'block';
                     this.classList.add('is-invalid');
@@ -964,7 +1482,6 @@
                     this.classList.remove('is-invalid');
                     this.classList.add('is-valid');
                 }
-                calcularDuracion();
                 updateProgressBar();
             });
             
@@ -1046,22 +1563,6 @@
         function normalizarRut(rut) {
             // Eliminar puntos y guiones, y convertir a mayúsculas el dígito verificador
             return rut.replace(/\./g, '').replace(/-/g, '').toUpperCase();
-        }
-
-        function calcularEdad(fechaNacimiento) {
-            if (!fechaNacimiento) return '-';
-            
-            const hoy = new Date();
-            const fechaNac = new Date(fechaNacimiento);
-            
-            let edad = hoy.getFullYear() - fechaNac.getFullYear();
-            const mes = hoy.getMonth() - fechaNac.getMonth();
-            
-            if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNac.getDate())) {
-                edad--;
-            }
-            
-            return edad;
         }
 
         function updateProgressBar() {
@@ -1246,18 +1747,6 @@
                 });
         }
 
-        // Función para obtener la IP del cliente
-        async function getClientIP() {
-            try {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                return data.ip;
-            } catch (error) {
-                console.error("Error al obtener la IP:", error);
-                return "No disponible";
-            }
-        }
-
         // ====== FUNCIONES PARA LA PANTALLA DE REVISIÓN ======
         function mostrarRevision() {
             // Validar que todos los campos requeridos estén completos
@@ -1309,17 +1798,6 @@
                 errores.push('El RUT del firmante debe coincidir con el RUT principal');
             }
             
-            // Validar edad (mayor de 18 años)
-            const fechaNacimiento = document.getElementById('fecha_nacimiento').value;
-            if (fechaNacimiento) {
-                const edad = calcularEdad(fechaNacimiento);
-                if (edad < 18) {
-                    document.getElementById('fechaNacimientoError').style.display = 'block';
-                    document.getElementById('fecha_nacimiento').classList.add('is-invalid');
-                    errores.push('Debe ser mayor de 18 años');
-                }
-            }
-            
             // Validar reCAPTCHA
             if (!grecaptcha.getResponse()) {
                 document.getElementById('captchaError').style.display = 'block';
@@ -1345,13 +1823,12 @@
             document.getElementById('reviewNombre').textContent = 
                 `${formData.get('nombres') || ''} ${formData.get('apellido_paterno') || ''} ${formData.get('apellido_materno') || ''}`.trim() || 'No especificado';
             document.getElementById('reviewFechaNacimiento').textContent = formData.get('fecha_nacimiento') || 'No especificado';
-            document.getElementById('reviewEdad').textContent = calcularEdad(formData.get('fecha_nacimiento')) + ' años';
             document.getElementById('reviewNacionalidad').textContent = formData.get('nacionalidad') || 'No especificado';
             document.getElementById('reviewEstadoCivil').textContent = formData.get('estado_civil') || 'No especificado';
             document.getElementById('reviewSexo').textContent = document.querySelector('#sexo option:checked')?.textContent || 'No especificado';
             document.getElementById('reviewDomicilio').textContent = formData.get('domicilio') || 'No especificado';
             document.getElementById('reviewEmail').textContent = formData.get('contacto_email') || 'No especificado';
-            document.getElementById('reviewTelefono').textContent = '+56 ' + (formData.get('contacto_telefono') || 'No especificado');
+            document.getElementById('reviewTelefono').textContent = formData.get('contacto_telefono') || 'No especificado';
             document.getElementById('reviewRegion').textContent = document.querySelector('#regionSelect option:checked')?.textContent || 'No especificado';
             document.getElementById('reviewProvincia').textContent = document.querySelector('#provinciaSelect option:checked')?.textContent || 'No especificado';
             
@@ -1422,7 +1899,7 @@
                         <strong>Cargo:</strong> ${exp.querySelector('input[name="cargo"]').value || 'No especificado'}<br>
                         <strong>Institución:</strong> ${exp.querySelector('input[name="institucion"]').value || 'No especificado'}<br>
                         <strong>Período:</strong> ${exp.querySelector('input[name="fecha_desde"]').value || 'No especificado'} - ${exp.querySelector('input[name="fecha_hasta"]').value || 'No especificado'}<br>
-                        <strong>Duración:</strong> ${exp.querySelector('.duracion-text').textContent || 'No especificado'}<br>
+                        <strong>Duración:</strong> ${exp.querySelector('input[name="duracion_texto"]').value || 'No especificado'}<br>
                         <strong>Logros:</strong> ${exp.querySelector('textarea[name="logros"]').value || 'No especificado'}
                     `;
                     experienciaContainer.appendChild(li);
@@ -1483,7 +1960,7 @@
             // Cierre de formulario
             document.getElementById('reviewNombreFirmante').textContent = formData.get('nombre_firmante') || 'No especificado';
             document.getElementById('reviewRutFirmante').textContent = formData.get('rut_firmante') || 'No especificado';
-            document.getElementById('reviewIP').textContent = clientIP || 'No especificado';
+            document.getElementById('reviewLugar').textContent = formData.get('lugar') || 'No especificado';
             document.getElementById('reviewFechaFirma').textContent = document.getElementById('fecha_firma_display').value || 'No especificado';
             
             // Ocultar formulario y mostrar pantalla de revisión
@@ -1500,10 +1977,7 @@
         }
 
         // ====== INICIALIZACIÓN PRINCIPAL ======
-        window.onload = async function() {
-            // Obtener la IP del cliente al cargar la página
-            clientIP = await getClientIP();
-            
+        window.onload = function() {
             establecerFechaActual();
             cargarDatosReferencia();
             cargarCargosDisponibles();
@@ -1561,48 +2035,7 @@
                 }
                 updateProgressBar();
             });
-            
-            // Validación para teléfono (solo números)
-            document.getElementById('contacto_telefono').addEventListener('input', function() {
-                // Eliminar caracteres no numéricos
-                this.value = this.value.replace(/[^0-9]/g, '');
-                
-                // Validar que solo contenga números
-                if (this.value && !/^[0-9]+$/.test(this.value)) {
-                    document.getElementById('telefonoError').style.display = 'block';
-                    this.classList.add('is-invalid');
-                    this.classList.remove('is-valid');
-                } else {
-                    document.getElementById('telefonoError').style.display = 'none';
-                    this.classList.remove('is-invalid');
-                    if (this.value) {
-                        this.classList.add('is-valid');
-                    }
-                }
-                updateProgressBar();
-            });
-            
-            // Validación para fecha de nacimiento (calcular edad y validar mayor de 18)
-            document.getElementById('fecha_nacimiento').addEventListener('change', function() {
-                const fechaNacimiento = this.value;
-                const edad = calcularEdad(fechaNacimiento);
-                
-                // Mostrar la edad calculada
-                document.getElementById('edadCalculada').textContent = edad + ' años';
-                
-                // Validar que sea mayor de 18 años
-                if (edad < 18) {
-                    document.getElementById('fechaNacimientoError').style.display = 'block';
-                    this.classList.add('is-invalid');
-                    this.classList.remove('is-valid');
-                } else {
-                    document.getElementById('fechaNacimientoError').style.display = 'none';
-                    this.classList.remove('is-invalid');
-                    this.classList.add('is-valid');
-                }
-                updateProgressBar();
-            });
-            
+
             document.querySelectorAll('input, select').forEach(element => {
                 element.addEventListener('change', updateProgressBar);
             });
@@ -1628,7 +2061,7 @@
                 const form = document.getElementById('cvForm');
                 const formData = new FormData(form);
                 const candidato = {};
-                const excludedFields = ['nombre_firmante', 'rut_firmante', 'fecha_firma', 'g-recaptcha-response'];
+                const excludedFields = ['nombre_firmante', 'rut_firmante', 'fecha_firma', 'lugar', 'g-recaptcha-response'];
 
                 for (let [key, value] of formData.entries()) {
                     if (!excludedFields.includes(key)) {
@@ -1653,7 +2086,7 @@
                         institucion: d.querySelector('input[name="institucion"]').value,
                         fecha_desde: d.querySelector('input[name="fecha_desde"]').value,
                         fecha_hasta: d.querySelector('input[name="fecha_hasta"]').value,
-                        duracion_texto: d.querySelector('.duracion-text').textContent,
+                        duracion_texto: d.querySelector('input[name="duracion_texto"]').value,
                         logros: d.querySelector('textarea[name="logros"]').value
                     })),
                     referencias: [...document.getElementById("referenciasContainer").children].map(d => ({
@@ -1669,7 +2102,7 @@
                         nombre_firmante: form.nombre_firmante.value,
                         rut_firmante: form.rut_firmante.value,
                         fecha_firma: form.fecha_firma.value,
-                        ip_origen: clientIP
+                        lugar: form.lugar.value
                     }
                 };
 
